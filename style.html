@@ -1,0 +1,405 @@
+<!-- Gallery Grid Section -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="site-title">Clinique Pasteur</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS File -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Arabic web font -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Page loader -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Welcome modal (shown once) -->
+  <div id="welcomeModal" class="welcome-modal" aria-hidden="true">
+    <div class="welcome-card">
+      <button class="welcome-close" id="welcome-close">&times;</button>
+      <h2>مرحبا بكم في مستشفى الأم والطفل</h2>
+      <p>رعايتنا موجهة للأم والطفل — خدمات طبية ذات جودة ودفء إنساني.</p>
+      <div class="d-flex gap-2 justify-content-center mt-3">
+        <a href="booking.html" class="btn btn-primary">احجز الآن</a>
+        <button class="btn btn-outline-light" id="welcome-no-thanks">استكشاف الموقع</button>
+      </div>
+    </div>
+  </div>
+
+
+<div class="bottom-container">
+  <div class="row">
+    <div class="col">
+      <button id="btn-inscription" class="btn btn-outline-light">Inscription</button>
+    </div>
+    <div class="col">
+      <button id="btn-connexion" class="btn btn-outline-light">Connexion</button>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal-login">
+  <div class="modal-content-login" id="modal-content-login">
+    <span class="close-login" id="closeLoginModal">&times;</span>
+    <h2 id="modal-title">Login</h2>
+    <form id="modal-form">
+      <div id="login-fields">
+        <div class="form-group mb-3">
+          <label for="username">Username</label>
+          <input type="text" id="username" class="form-control" placeholder="Enter username">
+        </div>
+        <div class="form-group mb-3">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+      </div>
+      <div id="signup-fields" style="display:none;">
+        <div class="form-group mb-3">
+          <label for="new-username">Username</label>
+          <input type="text" id="new-username" class="form-control" placeholder="Choose a username">
+        </div>
+        <div class="form-group mb-3">
+          <label for="new-email">Email</label>
+          <input type="email" id="new-email" class="form-control" placeholder="Enter your email">
+        </div>
+        <div class="form-group mb-3">
+          <label for="new-password">Mot de passe</label>
+          <input type="password" id="new-password" class="form-control" placeholder="Choose a password">
+        </div>
+        <div class="form-group mb-3">
+          <label for="confirm-password">Confirmer le mot de passe</label>
+          <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password">
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-2">Créer un compte</button>
+      </div>
+    </form>
+  </div>
+</div>
+  <!-- Main Header -->
+  <header class="main-header text-center py-3 bg-white shadow-sm sticky-top">
+    <h1 class="main-header-title mb-0" style="font-size:2.5rem;color:#e24d6a;font-weight:700;">المؤسسة الاستشفائية المتخصصة للأم و الطفل للجزائر</h1>
+    <p class="main-header-desc" style="font-size:1.2rem;color:#333;"></p>
+  </header>
+
+  <!-- Navbar (now sticky, starts transparent) -->
+  <nav class="navbar navbar-expand-lg transparent sticky-top shadow-lg" style="top:0;z-index:1020;">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100 font-bold" href="#">
+        <i class="fa-solid fa-hospital-user fa-2x me-2"></i>
+        <span id="site-brand">المؤسسة الاستشفائية المتخصصة للأم والطفل للجزائر</span>
+      </a>
+      <!-- زر الوضع الليلي/النهاري -->
+      <button id="toggle-dark" class="btn btn-outline-light ms-3" title="تبديل الوضع">
+        <i class="fa fa-moon"></i>
+      </button>
+      <!-- قائمة مع زر Accueil -->
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto">
+          <!-- زر Accueil تم حذفه -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#" id="accueilDropdown">
+              <i class="fa fa-home"></i> <span id="menu-accueil">Accueil</span>
+            </a>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="presentationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-info-circle"></i> <span id="menu-presentation">Présentation</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="presentationDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-histoire">Notre histoire</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-equipe">Équipe</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="soinsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-stethoscope"></i> <span id="menu-soins">Offre de soins</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="soinsDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-consultations">Consultations</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-chirurgie">Chirurgie</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-urgences">Urgences</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-laboratoire">Laboratoire</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="actualiteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-newspaper"></i> <span id="menu-actualite">Actualité</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="actualiteDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-nouvelles">Nouvelles</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-evenements">Événements</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="menu-contact">
+              <i class="fa fa-envelope"></i> <span id="menu-contact">Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Search -->
+          <div class="search-container position-relative" id="title-search" title="Rechercher">
+            <i class="fa fa-search search-icon"></i>
+            <input type="text" class="search-input" id="search-input" placeholder="Recherche...">
+          </div>
+
+          <!-- Language Dropdown -->
+          <div class="dropdown" id="title-languages" title="Langues">
+            <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+              <i class="fa fa-language"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item lang-btn" href="#" data-lang="fr" style="font-size:1.1em;font-weight:600;color:#d63384;">Français</a></li>
+              <li><a class="dropdown-item lang-btn" href="#" data-lang="en" style="font-size:1.1em;font-weight:600;color:#198754;">English</a></li>
+              <li><a class="dropdown-item lang-btn" href="#" data-lang="ar" style="font-size:1.1em;font-weight:600;color:#0d6efd;">العربية</a></li>
+            </ul>
+          </div>
+
+          <!-- Login / Signup -->
+          <button class="btn btn-outline-light" title="Connexion" id="btn-login"><i class="fa fa-sign-in-alt"></i> Connexion</button>
+          <button class="btn btn-light text-dark" title="Inscription" id="btn-signup"><i class="fa fa-user-plus"></i> Inscription</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sub-menu below navbar -->
+  <div class="sub-menu bg-white shadow-sm py-2 px-3 sticky-top" style="top:70px;z-index:1019;">
+    <ul class="nav justify-content-center">
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-services" href="#services-section">Services</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-specialties" href="#doctors-section">Spécialités</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-contact" href="#contact-section">Contact</a></li>
+    </ul>
+  </div>
+
+
+
+
+
+
+<!-- Gallery Grid Section (mكبرة وتحت الصفحة فقط)-->
+
+  <!-- Hero -->
+  <header class="hero-section flex items-center justify-center h-[70vh] relative bg-cover bg-center">
+    <div id="hero-indicators" class="hero-indicators" aria-label="Carousel indicators"></div>
+    <button class="hero-arrow hero-arrow-left" id="hero-arrow-left" aria-label="Précédent">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="hero-arrow hero-arrow-right" id="hero-arrow-right" aria-label="Suivant">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+    <div class="hero-content relative z-10 text-center">
+      <h1 id="hero-title" class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">Bienvenue à la Clinique Pasteur</h1>
+      <p id="hero-desc" class="text-lg md:text-xl text-white drop-shadow mb-2"></p>
+      <a class="btn btn-gradient btn-gradient-glow px-4 py-2 rounded-pill shadow-lg font-semibold" id="hero-btn" href="booking.html">احجز موعدًا</a>
+    </div>
+    <div class="hero-info-box-side">
+      <h3 class="hero-info-title" id="hero-info-title">Découvrez nos spécialités</h3>
+      <p class="hero-info-text" id="hero-info-text">La Clinique Pasteur propose une gamme complète de soins médicaux et chirurgicaux adaptés à tous les besoins.</p>
+      <button class="btn btn-info hero-info-more" id="hero-info-more">En savoir plus</button>
+    </div>
+  </header>
+
+  <!-- Services (homepage) -->
+  <section class="container py-5 reveal" id="services-section">
+    <h2 class="text-center mb-4">خدماتنا</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card p-3 img-hover">
+          <img src="CImages/service1.jpg" class="img-fluid rounded mb-3 parallax" data-speed="0.12" alt="">
+          <h5>استشارات طبية</h5>
+          <p class="text-muted">استشارات من أطباء مختصين في رعاية الأم والطفل.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 img-hover">
+          <img src="CImages/service2.jpg" class="img-fluid rounded mb-3 parallax" data-speed="0.18" alt="">
+          <h5>وحدة الولادة</h5>
+          <p class="text-muted">وحدات مريحة وآمنة للمولود والأم.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 img-hover">
+          <img src="CImages/service3.jpg" class="img-fluid rounded mb-3 parallax" data-speed="0.14" alt="">
+          <h5>مختبرات</h5>
+          <p class="text-muted">تحاليل سريعة ونتائج دقيقة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="py-5 bg-light reveal">
+    <div class="container text-center">
+      <div class="stats">
+        <div class="stat">
+          <div class="num counter" data-to="1280">0</div>
+          <div class="text-muted">مريض هذا العام</div>
+        </div>
+        <div class="stat">
+          <div class="num counter" data-to="86">0</div>
+          <div class="text-muted">طبيب مختص</div>
+        </div>
+        <div class="stat">
+          <div class="num counter" data-to="24">0</div>
+          <div class="text-muted">سنة خبرة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors -->
+  <section class="container py-5" id="doctors-section">
+    <h2 class="text-center mb-4 reveal">أطباؤنا</h2>
+    <div class="doctors-grid">
+      <div class="doctor-card reveal">
+        <img src="CImages/doc1.jpg" class="doctor-photo" alt="Dr Ahmed">
+        <div class="doctor-name">د. أحمد بن علي</div>
+        <div class="doctor-speciality">طبيب أطفال</div>
+        <div class="doctor-icons">
+          <a href="#" title="اتصال"><i class="fa fa-phone"></i></a>
+          <a href="#" title="مراسلة"><i class="fa fa-envelope"></i></a>
+          <a href="#" title="موقع"><i class="fa fa-globe"></i></a>
+        </div>
+      </div>
+      <div class="doctor-card reveal">
+        <img src="CImages/doc2.jpg" class="doctor-photo" alt="Dr Sara">
+        <div class="doctor-name">د. سارة بوزيد</div>
+        <div class="doctor-speciality">طبيبة أطفال</div>
+        <div class="doctor-icons">
+          <a href="#" title="اتصال"><i class="fa fa-phone"></i></a>
+          <a href="#" title="مراسلة"><i class="fa fa-envelope"></i></a>
+          <a href="#" title="موقع"><i class="fa fa-globe"></i></a>
+        </div>
+      </div>
+      <div class="doctor-card reveal">
+        <img src="CImages/doc3.jpg" class="doctor-photo" alt="Dr Yacine">
+        <div class="doctor-name">د. ياسين خليفة</div>
+        <div class="doctor-speciality">جراح أطفال</div>
+        <div class="doctor-icons">
+          <a href="#" title="اتصال"><i class="fa fa-phone"></i></a>
+          <a href="#" title="مراسلة"><i class="fa fa-envelope"></i></a>
+          <a href="#" title="موقع"><i class="fa fa-globe"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-5 reveal">
+    <div class="container">
+      <h2 class="text-center mb-4">آراء الزوار</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>خدمة ممتازة وطاقم متعاون للغاية. شكراً لكم!</p>
+          <strong>أمينة</strong>
+        </div>
+        <div class="testimonial">
+          <p>متابعة طبية محترفة وأنصح بهذه العيادة للأمهات.</p>
+          <strong>هدى</strong>
+        </div>
+        <div class="testimonial">
+          <p>مستوى عالٍ من النظافة والرعاية، تجربة مريحة جداً.</p>
+          <strong>يوسف</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="container py-5" id="contact-section">
+    <h2 class="text-center mb-4" id="contact-title">Contactez-nous</h2>
+    <form class="row g-3 justify-content-center">
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="contact-name" placeholder="Votre nom">
+      </div>
+      <div class="col-md-6">
+        <input type="email" class="form-control" id="contact-email" placeholder="Votre email">
+      </div>
+      <div class="col-12">
+        <textarea class="form-control" id="contact-message" rows="4" placeholder="Votre message"></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" id="contact-send">Envoyer</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-wave"></div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-md-start text-center mb-3">
+          <span class="footer-logo"><i class="fa-solid fa-hospital-user"></i> مستشفى الأم والطفل</span>
+          <div class="footer-desc mt-2">رعاية حديثة بدفء إنساني. عيادات متخصصة ومختبرات متطورة.</div>
+        </div>
+        <div class="col-md-4 text-center mb-3">
+          <h5>تواصل معنا</h5>
+          <div>العنوان: 12 شارع الصحة، الجزائر العاصمة</div>
+          <div>الهاتف: +213 21 123 456</div>
+          <div>البريد: <a href="mailto:info@pasteur.dz" style="color:#fff;">info@pasteur.dz</a></div>
+        </div>
+        <div class="col-md-4 text-md-end text-center mb-3">
+          <h5>تابعنا</h5>
+          <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:info@pasteur.dz" title="Email"><i class="fa fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center mt-3 footer-links">
+          <a href="#">الصفحة الرئيسية</a>
+          <a href="#">من نحن</a>
+          <a href="#services-section">خدماتنا</a>
+          <a href="#doctors-section">أطباؤنا</a>
+          <a href="booking.html">حجز موعد</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center mt-2 footer-copyright">
+          &copy; 2025 مستشفى الأم والطفل. جميع الحقوق محفوظة.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="Scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // زر Accueil لا يفعل أي شيء ولا يظهر أي رسالة
+  var accueilBtn = document.getElementById('accueilDropdown');
+  if (accueilBtn) {
+    accueilBtn.onclick = function(e) {
+      e.preventDefault(); // لا يفعل أي شيء عند الضغط
+      return false;
+    };
+  }
+});
+  </script>
+  
+</body>
+</html>
