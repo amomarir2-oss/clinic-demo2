@@ -281,7 +281,8 @@
     "signup_title": "Create a new account"
   },
   "nav": {
-    "toggle_navigation": "Toggle navigation"
+    "toggle_navigation": "Toggle navigation",
+    "request_appointment": "Request Appointment"
   },
   "submenu": {
     "services": "Services",
@@ -293,21 +294,57 @@
   },
   "modal": {
     "login": {
-      "title": "Sign In",
-      "subtitle": "Access your medical account",
-      "welcome": "Welcome back",
       "no_account": "Don't have an account?",
-      "create_account": "Create new account"
+      "create_account": "Create New Account"
     },
     "signup": {
+      "title": "Create New Account",
       "already_have_account": "Already have an account?",
-      "login_link": "Sign In"
+      "login_here": "Login here"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "save": "Save Settings",
+    "appearance": {
+      "title": "Appearance",
+      "dark_mode": "Dark Mode",
+      "dark_mode_desc": "Switch between light and dark themes"
+    },
+    "language": {
+      "title": "Language",
+      "select": "Select Language"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "font_size": "Font Size",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "high_contrast": "High Contrast",
+      "high_contrast_desc": "Improve text readability",
+      "reduce_motion": "Reduce Motion",
+      "reduce_motion_desc": "Minimize animations and transitions"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "appointment_reminders": "Appointment Reminders",
+      "appointment_reminders_desc": "Get notified about upcoming appointments",
+      "health_tips": "Health Tips",
+      "health_tips_desc": "Receive health and wellness tips"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "analytics": "Analytics",
+      "analytics_desc": "Help improve our services",
+      "cookies": "Cookies",
+      "cookies_desc": "Allow cookies for better experience"
     }
   },
   "common": {
     "hospital_name": "Specialized Medical Institute for Mother and Child",
     "close": "Close",
-    "loading": "Loading..."
+    "cancel": "Cancel"
   },
   "form": {
     "email": "Email Address",

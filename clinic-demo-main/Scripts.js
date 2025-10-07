@@ -114,8 +114,215 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Initialize theme toggle
+// Initialize theme toggle (old button - keeping for compatibility)
 document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+
+// Settings Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize settings modal controls
+  initializeSettingsModal();
+});
+
+function initializeSettingsModal() {
+  // Dark mode toggle in settings modal
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const themeIconModal = document.getElementById('theme-icon-modal');
+  
+  if (darkModeToggle) {
+    // Set initial state based on current theme
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    darkModeToggle.checked = isDarkMode;
+    updateThemeIcon(themeIconModal, isDarkMode);
+    
+    darkModeToggle.addEventListener('change', function() {
+      toggleTheme();
+      updateThemeIcon(themeIconModal, this.checked);
+    });
+  }
+  
+  // Language selection in settings modal
+  const langRadios = document.querySelectorAll('.lang-radio');
+  langRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        setLanguage(this.value);
+        updateLangSelector(this.value);
+      }
+    });
+  });
+  
+  // Font size controls
+  const fontSizeRadios = document.querySelectorAll('input[name="fontSize"]');
+  fontSizeRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        applyFontSize(this.value);
+        localStorage.setItem('fontSize', this.value);
+      }
+    });
+  });
+  
+  // High contrast toggle
+  const highContrastToggle = document.getElementById('highContrastToggle');
+  if (highContrastToggle) {
+    highContrastToggle.addEventListener('change', function() {
+      document.body.classList.toggle('high-contrast', this.checked);
+      localStorage.setItem('highContrast', this.checked);
+    });
+  }
+  
+  // Reduce motion toggle
+  const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+  if (reduceMotionToggle) {
+    reduceMotionToggle.addEventListener('change', function() {
+      document.body.classList.toggle('reduce-motion', this.checked);
+      localStorage.setItem('reduceMotion', this.checked);
+    });
+  }
+  
+  // Notification toggles
+  const appointmentNotifications = document.getElementById('appointmentNotifications');
+  const healthTipsNotifications = document.getElementById('healthTipsNotifications');
+  
+  if (appointmentNotifications) {
+    appointmentNotifications.addEventListener('change', function() {
+      localStorage.setItem('appointmentNotifications', this.checked);
+    });
+  }
+  
+  if (healthTipsNotifications) {
+    healthTipsNotifications.addEventListener('change', function() {
+      localStorage.setItem('healthTipsNotifications', this.checked);
+    });
+  }
+  
+  // Privacy toggles
+  const analyticsToggle = document.getElementById('analyticsToggle');
+  const cookiesToggle = document.getElementById('cookiesToggle');
+  
+  if (analyticsToggle) {
+    analyticsToggle.addEventListener('change', function() {
+      localStorage.setItem('analytics', this.checked);
+    });
+  }
+  
+  if (cookiesToggle) {
+    cookiesToggle.addEventListener('change', function() {
+      localStorage.setItem('cookies', this.checked);
+    });
+  }
+  
+  // Save settings button
+  const saveSettingsBtn = document.getElementById('saveSettings');
+  if (saveSettingsBtn) {
+    saveSettingsBtn.addEventListener('click', function() {
+      // Show success message
+      showSettingsSavedMessage();
+      // Close modal
+      const settingsModal = bootstrap.Modal.getInstance(document.getElementById('settingsModal'));
+      if (settingsModal) {
+        settingsModal.hide();
+      }
+    });
+  }
+  
+  // Load saved settings
+  loadSavedSettings();
+}
+
+function updateThemeIcon(iconElement, isDarkMode) {
+  if (iconElement) {
+    if (isDarkMode) {
+      iconElement.classList.remove('fa-sun');
+      iconElement.classList.add('fa-moon');
+    } else {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-sun');
+    }
+  }
+}
+
+function applyFontSize(size) {
+  // Remove existing font size classes
+  document.body.classList.remove('font-small', 'font-medium', 'font-large');
+  // Add new font size class
+  document.body.classList.add(`font-${size}`);
+}
+
+function loadSavedSettings() {
+  try {
+    // Load font size
+    const savedFontSize = localStorage.getItem('fontSize') || 'medium';
+    const fontSizeRadio = document.querySelector(`input[name="fontSize"][value="${savedFontSize}"]`);
+    if (fontSizeRadio) {
+      fontSizeRadio.checked = true;
+      applyFontSize(savedFontSize);
+    }
+    
+    // Load high contrast
+    const highContrast = localStorage.getItem('highContrast') === 'true';
+    const highContrastToggle = document.getElementById('highContrastToggle');
+    if (highContrastToggle) {
+      highContrastToggle.checked = highContrast;
+      document.body.classList.toggle('high-contrast', highContrast);
+    }
+    
+    // Load reduce motion
+    const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
+    const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+    if (reduceMotionToggle) {
+      reduceMotionToggle.checked = reduceMotion;
+      document.body.classList.toggle('reduce-motion', reduceMotion);
+    }
+    
+    // Load notification preferences
+    const appointmentNotifications = localStorage.getItem('appointmentNotifications') !== 'false';
+    const healthTipsNotifications = localStorage.getItem('healthTipsNotifications') === 'true';
+    
+    const appointmentToggle = document.getElementById('appointmentNotifications');
+    const healthTipsToggle = document.getElementById('healthTipsNotifications');
+    
+    if (appointmentToggle) appointmentToggle.checked = appointmentNotifications;
+    if (healthTipsToggle) healthTipsToggle.checked = healthTipsNotifications;
+    
+    // Load privacy preferences
+    const analytics = localStorage.getItem('analytics') !== 'false';
+    const cookies = localStorage.getItem('cookies') !== 'false';
+    
+    const analyticsToggle = document.getElementById('analyticsToggle');
+    const cookiesToggle = document.getElementById('cookiesToggle');
+    
+    if (analyticsToggle) analyticsToggle.checked = analytics;
+    if (cookiesToggle) cookiesToggle.checked = cookies;
+    
+    // Load current language selection
+    const currentLang = localStorage.getItem('lang') || 'fr';
+    const langRadio = document.querySelector(`input[name="languageSelect"][value="${currentLang}"]`);
+    if (langRadio) {
+      langRadio.checked = true;
+    }
+    
+  } catch (error) {
+    console.log('Could not load some settings from localStorage');
+  }
+}
+
+function showSettingsSavedMessage() {
+  // Create a temporary success message
+  const message = document.createElement('div');
+  message.className = 'alert alert-success position-fixed';
+  message.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 250px;';
+  message.innerHTML = '<i class="fas fa-check-circle me-2"></i>Settings saved successfully!';
+  
+  document.body.appendChild(message);
+  
+  // Remove message after 3 seconds
+  setTimeout(() => {
+    if (message.parentNode) {
+      message.parentNode.removeChild(message);
+    }
+  }, 3000);
+}
 
 // Check for saved theme preference and set main button to current language
 document.addEventListener('DOMContentLoaded', () => {

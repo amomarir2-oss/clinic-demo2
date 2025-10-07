@@ -281,7 +281,8 @@
     "signup_title": "إنشاء حساب جديد"
   },
   "nav": {
-    "toggle_navigation": "تبديل التنقل"
+    "toggle_navigation": "تبديل التنقل",
+    "request_appointment": "طلب موعد"
   },
   "submenu": {
     "services": "الخدمات",
@@ -304,10 +305,49 @@
       "login_link": "تسجيل الدخول"
     }
   },
+  "settings": {
+    "title": "الإعدادات",
+    "save": "حفظ الإعدادات",
+    "appearance": {
+      "title": "المظهر",
+      "dark_mode": "الوضع الليلي",
+      "dark_mode_desc": "التبديل بين الوضع الفاتح والداكن"
+    },
+    "language": {
+      "title": "اللغة",
+      "select": "اختر اللغة"
+    },
+    "accessibility": {
+      "title": "إمكانية الوصول",
+      "font_size": "حجم الخط",
+      "small": "صغير",
+      "medium": "متوسط",
+      "large": "كبير",
+      "high_contrast": "تباين عالي",
+      "high_contrast_desc": "تحسين قابلية قراءة النص",
+      "reduce_motion": "تقليل الحركة",
+      "reduce_motion_desc": "تقليل الرسوم المتحركة والانتقالات"
+    },
+    "notifications": {
+      "title": "الإشعارات",
+      "appointment_reminders": "تذكير المواعيد",
+      "appointment_reminders_desc": "احصل على إشعارات حول المواعيد القادمة",
+      "health_tips": "نصائح صحية",
+      "health_tips_desc": "تلقي نصائح الصحة والعافية"
+    },
+    "privacy": {
+      "title": "الخصوصية",
+      "analytics": "التحليلات",
+      "analytics_desc": "ساعد في تحسين خدماتنا",
+      "cookies": "ملفات تعريف الارتباط",
+      "cookies_desc": "السماح بملفات تعريف الارتباط لتجربة أفضل"
+    }
+  },
   "common": {
     "hospital_name": "المؤسسة الطبية المتخصصة للأم والطفل",
     "close": "إغلاق",
-    "loading": "جاري التحميل..."
+    "loading": "جاري التحميل...",
+    "cancel": "إلغاء"
   },
   "form": {
     "email": "البريد الإلكتروني",

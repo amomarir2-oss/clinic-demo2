@@ -3210,3 +3210,215 @@ body.rtl .search-input {
 .dark-mode .contact-item {
   color: rgba(248,215,218,0.9);
 }
+
+/* Premium Golden Appointment Button */
+#menuRDV {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 25%, #ffd700 50%, #ffb300 75%, #ffd700 100%) !important;
+  border: 3px solid #b8860b !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 12px 20px !important;
+  border-radius: 25px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  box-shadow: 
+    0 8px 25px rgba(255, 215, 0, 0.5),
+    0 4px 15px rgba(255, 179, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Animated golden shimmer effect */
+#menuRDV::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+  transition: left 0.6s !important;
+}
+
+#menuRDV:hover::before {
+  left: 100% !important;
+}
+
+#menuRDV:hover {
+  background: linear-gradient(135deg, #ffed4e 0%, #ffd700 25%, #ffed4e 50%, #ffd700 75%, #ffed4e 100%) !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 
+    0 12px 35px rgba(255, 215, 0, 0.7),
+    0 8px 25px rgba(255, 179, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  border-color: #daa520 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+#menuRDV:active {
+  transform: translateY(-1px) scale(1.02) !important;
+  box-shadow: 
+    0 6px 20px rgba(255, 215, 0, 0.6),
+    0 3px 10px rgba(255, 179, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Pulsing glow animation */
+@keyframes goldenPulse {
+  0% {
+    box-shadow: 
+      0 8px 25px rgba(255, 215, 0, 0.5),
+      0 4px 15px rgba(255, 179, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 10px 30px rgba(255, 215, 0, 0.7),
+      0 6px 20px rgba(255, 179, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 8px 25px rgba(255, 215, 0, 0.5),
+      0 4px 15px rgba(255, 179, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+#menuRDV {
+  animation: goldenPulse 3s ease-in-out infinite !important;
+}
+
+/* Icon styling */
+#menuRDV i {
+  margin-right: 8px !important;
+  font-size: 1.2rem !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark mode support for appointment button */
+.dark-mode #menuRDV {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 25%, #ffd700 50%, #ffb300 75%, #ffd700 100%) !important;
+  color: #1a1a1a !important;
+  border-color: #b8860b !important;
+  box-shadow: 
+    0 8px 25px rgba(255, 215, 0, 0.6),
+    0 4px 15px rgba(255, 179, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark-mode #menuRDV:hover {
+  background: linear-gradient(135deg, #ffed4e 0%, #ffd700 25%, #ffed4e 50%, #ffd700 75%, #ffed4e 100%) !important;
+  color: #1a1a1a !important;
+  box-shadow: 
+    0 12px 35px rgba(255, 215, 0, 0.8),
+    0 8px 25px rgba(255, 179, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Settings Button Styling */
+.settings-btn {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.settings-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  transform: rotate(90deg) !important;
+}
+
+/* Settings Modal Styling */
+.settings-section-title {
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.settings-item {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.settings-item:hover {
+  border-color: #dee2e6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.language-options .form-check {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.language-options .form-check:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.language-options .form-check-input:checked + .form-check-label {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.flag {
+  font-size: 1.2em;
+}
+
+/* Accessibility Font Size Classes */
+.font-small {
+  font-size: 0.875rem !important;
+}
+
+.font-medium {
+  font-size: 1rem !important;
+}
+
+.font-large {
+  font-size: 1.125rem !important;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  filter: contrast(150%) !important;
+}
+
+.high-contrast * {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Reduced Motion */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Dark mode settings modal */
+.dark-mode .settings-section-title {
+  color: #f8f9fa;
+  border-bottom-color: #495057;
+}
+
+.dark-mode .settings-item {
+  background-color: #343a40 !important;
+  color: #f8f9fa;
+}
+
+.dark-mode .settings-item:hover {
+  border-color: #6c757d;
+  background-color: #495057 !important;
+}
+
+.dark-mode .text-muted {
+  color: #adb5bd !important;
+}

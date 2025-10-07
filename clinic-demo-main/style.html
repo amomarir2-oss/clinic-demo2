@@ -87,8 +87,8 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-warning text-dark ms-3" href="#" id="menuRDV">
-              <i class="fa fa-calendar-check"></i> Demander un rendez-vous
+            <a class="nav-link btn btn-warning text-dark ms-3 shadow-lg" href="#" id="menuRDV">
+              <i class="fa fa-calendar-check"></i> <span data-i18n="nav.request_appointment">طلب موعد</span>
             </a>
           </li>
         </ul>
@@ -101,38 +101,10 @@
             <input type="text" class="search-input" id="searchInput" placeholder="Recherche..." aria-label="Rechercher">
           </div>
 
-          <!-- Theme Toggle -->
-          <button id="themeToggle" class="btn btn-outline-light" aria-label="Changer de thème" title="Changer de thème">
-            <i class="fas fa-sun" id="theme-icon"></i>
+          <!-- Settings Button -->
+          <button class="btn btn-outline-light settings-btn" data-bs-toggle="modal" data-bs-target="#settingsModal" aria-label="Settings" title="Settings">
+            <i class="fas fa-cog"></i>
           </button>
-
-          <!-- Language Selection -->
-          <div class="dropdown lang-selector" id="titleLanguages" title="Langues">
-            <button class="btn btn-outline-light main-lang-btn dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span id="main-flag" class="me-2">🇫🇷</span>
-              <span id="main-lang-label">Français</span>
-            </button>
-            <ul class="dropdown-menu lang-options">
-              <li>
-                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="fr">
-                  <span class="flag me-2">🇫🇷</span>
-                  <span class="lang-name" data-i18n="language.french">Français</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="en">
-                  <span class="flag me-2">🇬🇧</span>
-                  <span class="lang-name" data-i18n="language.english">English</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="ar">
-                  <span class="flag me-2">🇩🇿</span>
-                  <span class="lang-name" data-i18n="language.arabic">العربية</span>
-                </a>
-              </li>
-            </ul>
-          </div>
 
           <!-- Enhanced Login / Signup Buttons -->
           <div class="auth-buttons d-flex">
@@ -708,6 +680,183 @@
       </div>
     </form>
   </section>
+
+  <!-- Settings Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="settingsModalLabel">
+            <i class="fas fa-cog me-2"></i>
+            <span data-i18n="settings.title">Settings</span>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <!-- Theme Settings -->
+          <div class="settings-section mb-4">
+            <h6 class="settings-section-title">
+              <i class="fas fa-palette me-2 text-primary"></i>
+              <span data-i18n="settings.appearance.title">Appearance</span>
+            </h6>
+            <div class="settings-item d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.appearance.dark_mode">Dark Mode</div>
+                <small class="text-muted" data-i18n="settings.appearance.dark_mode_desc">Switch between light and dark themes</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                <label class="form-check-label" for="darkModeToggle">
+                  <i class="fas fa-sun" id="theme-icon-modal"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Language Settings -->
+          <div class="settings-section mb-4">
+            <h6 class="settings-section-title">
+              <i class="fas fa-globe me-2 text-primary"></i>
+              <span data-i18n="settings.language.title">Language</span>
+            </h6>
+            <div class="settings-item p-3 bg-light rounded">
+              <div class="fw-bold mb-2" data-i18n="settings.language.select">Select Language</div>
+              <div class="language-options">
+                <div class="form-check mb-2">
+                  <input class="form-check-input lang-radio" type="radio" name="languageSelect" id="langFr" value="fr" checked>
+                  <label class="form-check-label d-flex align-items-center" for="langFr">
+                    <span class="flag me-2">🇫🇷</span>
+                    <span data-i18n="language.french">Français</span>
+                  </label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input lang-radio" type="radio" name="languageSelect" id="langEn" value="en">
+                  <label class="form-check-label d-flex align-items-center" for="langEn">
+                    <span class="flag me-2">🇬🇧</span>
+                    <span data-i18n="language.english">English</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input lang-radio" type="radio" name="languageSelect" id="langAr" value="ar">
+                  <label class="form-check-label d-flex align-items-center" for="langAr">
+                    <span class="flag me-2">🇩🇿</span>
+                    <span data-i18n="language.arabic">العربية</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessibility Settings -->
+          <div class="settings-section mb-4">
+            <h6 class="settings-section-title">
+              <i class="fas fa-universal-access me-2 text-primary"></i>
+              <span data-i18n="settings.accessibility.title">Accessibility</span>
+            </h6>
+            
+            <!-- Font Size -->
+            <div class="settings-item mb-3 p-3 bg-light rounded">
+              <div class="fw-bold mb-2" data-i18n="settings.accessibility.font_size">Font Size</div>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="fontSize" id="fontSmall" value="small">
+                <label class="btn btn-outline-secondary" for="fontSmall" data-i18n="settings.accessibility.small">Small</label>
+                
+                <input type="radio" class="btn-check" name="fontSize" id="fontMedium" value="medium" checked>
+                <label class="btn btn-outline-secondary" for="fontMedium" data-i18n="settings.accessibility.medium">Medium</label>
+                
+                <input type="radio" class="btn-check" name="fontSize" id="fontLarge" value="large">
+                <label class="btn btn-outline-secondary" for="fontLarge" data-i18n="settings.accessibility.large">Large</label>
+              </div>
+            </div>
+
+            <!-- High Contrast -->
+            <div class="settings-item mb-3 d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.accessibility.high_contrast">High Contrast</div>
+                <small class="text-muted" data-i18n="settings.accessibility.high_contrast_desc">Improve text readability</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="highContrastToggle">
+              </div>
+            </div>
+
+            <!-- Reduce Motion -->
+            <div class="settings-item d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.accessibility.reduce_motion">Reduce Motion</div>
+                <small class="text-muted" data-i18n="settings.accessibility.reduce_motion_desc">Minimize animations and transitions</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="reduceMotionToggle">
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification Settings -->
+          <div class="settings-section mb-4">
+            <h6 class="settings-section-title">
+              <i class="fas fa-bell me-2 text-primary"></i>
+              <span data-i18n="settings.notifications.title">Notifications</span>
+            </h6>
+            
+            <div class="settings-item mb-3 d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.notifications.appointment_reminders">Appointment Reminders</div>
+                <small class="text-muted" data-i18n="settings.notifications.appointment_reminders_desc">Get notified about upcoming appointments</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="appointmentNotifications" checked>
+              </div>
+            </div>
+
+            <div class="settings-item d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.notifications.health_tips">Health Tips</div>
+                <small class="text-muted" data-i18n="settings.notifications.health_tips_desc">Receive health and wellness tips</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="healthTipsNotifications">
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy Settings -->
+          <div class="settings-section">
+            <h6 class="settings-section-title">
+              <i class="fas fa-shield-alt me-2 text-primary"></i>
+              <span data-i18n="settings.privacy.title">Privacy</span>
+            </h6>
+            
+            <div class="settings-item mb-3 d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.privacy.analytics">Analytics</div>
+                <small class="text-muted" data-i18n="settings.privacy.analytics_desc">Help improve our services</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="analyticsToggle" checked>
+              </div>
+            </div>
+
+            <div class="settings-item d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <div>
+                <div class="fw-bold" data-i18n="settings.privacy.cookies">Cookies</div>
+                <small class="text-muted" data-i18n="settings.privacy.cookies_desc">Allow cookies for better experience</small>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="cookiesToggle" checked>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveSettings" data-i18n="settings.save">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Enhanced Footer -->
   <footer class="cus_footer bg-pink-600 text-white py-5 mt-5">

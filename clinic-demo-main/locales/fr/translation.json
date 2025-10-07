@@ -279,7 +279,8 @@
     "signup_title": "Créer un nouveau compte"
   },
   "nav": {
-    "toggle_navigation": "Basculer la navigation"
+    "toggle_navigation": "Basculer la navigation",
+    "request_appointment": "Demander un rendez-vous"
   },
   "submenu": {
     "services": "Services",
@@ -302,10 +303,49 @@
       "login_link": "Se connecter"
     }
   },
+  "settings": {
+    "title": "Paramètres",
+    "save": "Enregistrer les paramètres",
+    "appearance": {
+      "title": "Apparence",
+      "dark_mode": "Mode sombre",
+      "dark_mode_desc": "Basculer entre les thèmes clair et sombre"
+    },
+    "language": {
+      "title": "Langue",
+      "select": "Sélectionner la langue"
+    },
+    "accessibility": {
+      "title": "Accessibilité",
+      "font_size": "Taille de police",
+      "small": "Petite",
+      "medium": "Moyenne",
+      "large": "Grande",
+      "high_contrast": "Contraste élevé",
+      "high_contrast_desc": "Améliorer la lisibilité du texte",
+      "reduce_motion": "Réduire les mouvements",
+      "reduce_motion_desc": "Minimiser les animations et transitions"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "appointment_reminders": "Rappels de rendez-vous",
+      "appointment_reminders_desc": "Être notifié des rendez-vous à venir",
+      "health_tips": "Conseils santé",
+      "health_tips_desc": "Recevoir des conseils de santé et bien-être"
+    },
+    "privacy": {
+      "title": "Confidentialité",
+      "analytics": "Analyses",
+      "analytics_desc": "Aider à améliorer nos services",
+      "cookies": "Cookies",
+      "cookies_desc": "Autoriser les cookies pour une meilleure expérience"
+    }
+  },
   "common": {
     "hospital_name": "Institut médical spécialisé pour la mère et l'enfant",
     "close": "Fermer",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "cancel": "Annuler"
   },
   "form": {
     "email": "Adresse e-mail",
