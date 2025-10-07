@@ -1,0 +1,22 @@
+{
+  "languages": [
+    {
+      "code": "fr",
+      "name": "Français",
+      "flag": "🇫🇷",
+      "dir": "ltr"
+    },
+    {
+      "code": "en", 
+      "name": "English",
+      "flag": "🇬🇧",
+      "dir": "ltr"
+    },
+    {
+      "code": "ar",
+      "name": "العربية", 
+      "flag": "🇩🇿",
+      "dir": "rtl"
+    }
+  ]
+}

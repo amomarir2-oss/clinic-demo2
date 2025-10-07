@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="site-title">Clinique Pasteur</title>
+  <title id="siteTitle">Clinique Pasteur</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,23 +16,27 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator" id="scroll-indicator"></div>
   <!-- Main Header -->
-  <header class="main-header text-center py-3 bg-white shadow-sm sticky-top">
-    <h1 class="main-header-title mb-0">المؤسسة الاستشفائية المتخصصة للأم و الطفل للجزائر</h1>
-    <p class="main-header-desc">Santé, innovation et confiance à Alger</p>
+  <header class="main-header text-center py-3 bg-white shadow-sm" id="main-header">
+    <h1 class="main-header-title mb-0" id="siteBrand">Specialized Medical Institute for Mother and Child</h1>
   </header>
 
-  <!-- Navbar (now sticky) -->
-  <nav class="navbar navbar-expand-lg bg-pink-600 dark:bg-gray-900 shadow-lg sticky-top">
+  <!-- Navbar (dynamic sticky) -->
+  <nav class="navbar navbar-expand-lg bg-pink-600 dark:bg-gray-900 shadow-lg" id="main-navbar">
     <div class="container-fluid">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100 font-bold" href="#">
-        <i class="fa-solid fa-hospital-user fa-2x me-2"></i>
-        <span id="site-brand">Clinique Pasteur Audin — Mère &amp; Fils Claudin, Alger</span>
+      <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100" href="#">
+        <img src="logo-navbar.png" alt="Specialized Medical Institute for Mother and Child" class="navbar-logo me-3" id="logoAltTarget">
+        <div class="brand-text">
+          <div class="brand-primary" id="siteBrandShort">Specialized Medical Institute</div>
+          <div class="brand-secondary" id="siteBrandSubtitle">Mother and Child • Algeria</div>
+        </div>
       </a>
 
       <!-- Toggle (mobile) -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Basculer la navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Basculer la navigation" data-i18n="[aria-label]nav.toggle_navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -41,68 +45,69 @@
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
             <a class="nav-link" href="#" id="menu-accueil">
-              <i class="fa fa-home"></i> <span>Accueil</span>
+              <i class="fa fa-home"></i> <span id="menuAccueil">Accueil</span>
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="presentationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-info-circle"></i> <span id="menu-presentation">Présentation</span>
+              <i class="fa fa-info-circle"></i> <span id="menuPresentation">Présentation</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="presentationDropdown">
-              <li><a class="dropdown-item" href="#" id="menu-histoire">Notre histoire</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-equipe">Équipe</a></li>
+              <li><a class="dropdown-item" href="#" id="menuHistoire">Notre histoire</a></li>
+              <li><a class="dropdown-item" href="#" id="menuEquipe">Équipe</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="soinsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-stethoscope"></i> <span id="menu-soins">Offre de soins</span>
+              <i class="fa fa-stethoscope"></i> <span id="menuSoins">Offre de soins</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="soinsDropdown">
-              <li><a class="dropdown-item" href="#" id="menu-consultations">Consultations</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-chirurgie">Chirurgie</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-urgences">Urgences</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-laboratoire">Laboratoire</a></li>
+              <li><a class="dropdown-item" href="#" id="menuConsultations">Consultations</a></li>
+              <li><a class="dropdown-item" href="#" id="menuChirurgie">Chirurgie</a></li>
+              <li><a class="dropdown-item" href="#" id="menuUrgences">Urgences</a></li>
+              <li><a class="dropdown-item" href="#" id="menuLaboratoire">Laboratoire</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="actualiteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-newspaper"></i> <span id="menu-actualite">Actualité</span>
+              <i class="fa fa-newspaper"></i> <span id="menuActualite">Actualité</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="actualiteDropdown">
-              <li><a class="dropdown-item" href="#" id="menu-nouvelles">Nouvelles</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-evenements">Événements</a></li>
+              <li><a class="dropdown-item" href="#" id="menuNouvelles">Nouvelles</a></li>
+              <li><a class="dropdown-item" href="#" id="menuEvenements">Événements</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-envelope"></i> <span id="menu-contact">Contact</span>
+              <i class="fa fa-envelope"></i> <span id="menuContact">Contact</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="contactDropdown">
-              <li><a class="dropdown-item" href="#" id="menu-formulaire">Formulaire</a></li>
-              <li><a class="dropdown-item" href="#" id="menu-localisation">Localisation</a></li>
+              <li><a class="dropdown-item" href="#" id="menuFormulaire">Formulaire</a></li>
+              <li><a class="dropdown-item" href="#" id="menuLocalisation">Localisation</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-warning text-dark ms-3" href="#" id="menu-rdv">
+            <a class="nav-link btn btn-warning text-dark ms-3" href="#" id="menuRDV">
               <i class="fa fa-calendar-check"></i> Demander un rendez-vous
             </a>
           </li>
         </ul>
 
         <!-- Right Actions -->
-        <div class="d-flex align-items-center gap-2">
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" class="btn btn-outline-light" aria-label="Changer de thème" title="Changer de thème">
-            <i class="fas fa-sun" id="theme-icon"></i>
-          </button>
+        <div class="navbar-actions d-flex align-items-center">
           <!-- Search -->
-          <div class="search-container position-relative" id="title-search" title="Rechercher">
+          <div class="search-container position-relative" id="titleSearch" title="Rechercher">
             <i class="fa fa-search search-icon"></i>
-            <input type="text" class="search-input" id="search-input" placeholder="Recherche...">
+            <input type="text" class="search-input" id="searchInput" placeholder="Recherche..." aria-label="Rechercher">
           </div>
 
+          <!-- Theme Toggle -->
+          <button id="themeToggle" class="btn btn-outline-light" aria-label="Changer de thème" title="Changer de thème">
+            <i class="fas fa-sun" id="theme-icon"></i>
+          </button>
+
           <!-- Language Selection -->
-          <div class="dropdown lang-selector" id="title-languages" title="Langues">
+          <div class="dropdown lang-selector" id="titleLanguages" title="Langues">
             <button class="btn btn-outline-light main-lang-btn dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="main-flag" class="me-2">🇫🇷</span>
               <span id="main-lang-label">Français</span>
@@ -111,40 +116,46 @@
               <li>
                 <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="fr">
                   <span class="flag me-2">🇫🇷</span>
-                  <span class="lang-name">Français</span>
+                  <span class="lang-name" data-i18n="language.french">Français</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="en">
                   <span class="flag me-2">🇬🇧</span>
-                  <span class="lang-name">English</span>
+                  <span class="lang-name" data-i18n="language.english">English</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="ar">
                   <span class="flag me-2">🇩🇿</span>
-                  <span class="lang-name">العربية</span>
+                  <span class="lang-name" data-i18n="language.arabic">العربية</span>
                 </a>
               </li>
             </ul>
           </div>
 
-          <!-- Login / Signup -->
-          <button class="btn btn-outline-light" title="Connexion" id="btn-login"><i class="fa fa-sign-in-alt"></i> Connexion</button>
-          <button class="btn btn-light text-dark" title="Inscription" id="btn-signup"><i class="fa fa-user-plus"></i> Inscription</button>
-
-          
+          <!-- Enhanced Login / Signup Buttons -->
+          <div class="auth-buttons d-flex">
+            <button class="btn auth-btn auth-btn-login" data-i18n="[title]auth.login_title" id="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <i class="fas fa-sign-in-alt me-2"></i>
+              <span class="auth-btn-text" data-i18n="auth.login">تسجيل الدخول</span>
+            </button>
+            <button class="btn auth-btn auth-btn-signup" data-i18n="[title]auth.signup_title" id="btn-signup" data-bs-toggle="modal" data-bs-target="#signupModal">
+              <i class="fas fa-user-plus me-2"></i>
+              <span class="auth-btn-text" data-i18n="auth.signup">إنشاء حساب</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Sub-menu below navbar -->
-  <div class="sub-menu bg-white shadow-sm py-2 px-3 sticky-top">
+  <div class="sub-menu bg-white shadow-sm py-2 px-3" id="sub-menu">
     <ul class="nav justify-content-center">
-      <li class="nav-item"><a class="nav-link sub-link" id="sub-services" href="#services-section">Services</a></li>
-      <li class="nav-item"><a class="nav-link sub-link" id="sub-specialties" href="#doctors-section">Spécialités</a></li>
-      <li class="nav-item"><a class="nav-link sub-link" id="sub-contact" href="#contact-section">Contact</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-services" href="#services-section" data-i18n="submenu.services">Services</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-specialties" href="#doctors-section" data-i18n="submenu.specialties">Spécialités</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-contact" href="#contact-section" data-i18n="submenu.contact">Contact</a></li>
     </ul>
   </div>
 
@@ -152,98 +163,220 @@
   <!-- Note: hero background set to cliniqueaudin as requested -->
   <header class="hero-section hero-bg-maisons flex items-center justify-center h-[70vh] relative bg-cover bg-center">
     <!-- indicators: small "balls" showing number of hero images; JS will populate these -->
-    <div id="hero-indicators" class="hero-indicators" aria-label="Carousel indicators"></div>
+    <div id="hero-indicators" class="hero-indicators" aria-label="Carousel indicators" data-i18n="[aria-label]hero.carousel_indicators"></div>
   </header>
 
-  <!-- Login Modal -->
+  <!-- Beautiful Bootstrap Login Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <!-- Header with gradient background -->
+        <div class="modal-header bg-gradient text-white border-0 position-relative overflow-hidden">
+          <div class="position-absolute top-0 start-0 w-100 h-100 login-header-gradient"></div>
+          <div class="position-relative z-1 d-flex align-items-center">
+            <div class="me-3">
+              <div class="bg-white bg-opacity-20 rounded-circle p-2">
+                <i class="fas fa-user-shield fs-4 text-white"></i>
+              </div>
+            </div>
+            <div>
+              <h4 class="modal-title mb-0 fw-bold" id="loginModalLabel" data-i18n="modal.login.title">تسجيل الدخول</h4>
+              <small class="opacity-90" data-i18n="modal.login.subtitle">الدخول إلى حسابك الطبي</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white position-relative z-1" data-bs-dismiss="modal" aria-label="إغلاق" data-i18n="[aria-label]common.close"></button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" required>
+        
+        <div class="modal-body p-4">
+          <!-- Welcome Card -->
+          <div class="card border-0 bg-light mb-4">
+            <div class="card-body text-center py-3">
+              <div class="mb-2">
+                <i class="fas fa-hospital text-primary fs-3 mb-2"></i>
+              </div>
+              <h6 class="card-title text-primary mb-1" data-i18n="modal.login.welcome">مرحباً بعودتك</h6>
+              <p class="card-text text-muted small mb-0" data-i18n="common.hospital_name">المؤسسة الاستشفائية المتخصصة للأم والطفل</p>
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Mot de passe</label>
-              <input type="password" class="form-control" id="password" required>
+          </div>
+          
+          <form id="loginForm" class="needs-validation" novalidate>
+            <!-- Email Input Group -->
+            <div class="mb-4">
+              <label for="email" class="form-label fw-semibold text-dark">
+                <i class="fas fa-envelope text-primary me-2"></i><span data-i18n="form.email">البريد الإلكتروني</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="fas fa-at text-muted"></i>
+                </span>
+                <input type="email" class="form-control border-start-0 ps-0" id="email" 
+                       placeholder="أدخل بريدك الإلكتروني" data-i18n="[placeholder]form.email_placeholder" required>
+                <div class="invalid-feedback">
+                  <i class="fas fa-exclamation-triangle me-1"></i><span data-i18n="validation.email_invalid">يرجى إدخال بريد إلكتروني صحيح</span>
+                </div>
+                <div class="valid-feedback">
+                  <i class="fas fa-check-circle me-1"></i><span data-i18n="validation.email_valid">بريد إلكتروني صحيح</span>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+            
+            <!-- Password Input Group -->
+            <div class="mb-4">
+              <label for="password" class="form-label fw-semibold text-dark">
+                <i class="fas fa-lock text-primary me-2"></i><span data-i18n="form.password">كلمة المرور</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="fas fa-key text-muted"></i>
+                </span>
+                <input type="password" class="form-control border-0 ps-0" id="password" 
+                       placeholder="أدخل كلمة المرور" data-i18n="[placeholder]form.password_placeholder" required minlength="6">
+                <button class="btn btn-outline-secondary border-start-0" type="button" id="togglePassword">
+                  <i class="fas fa-eye" id="eyeIcon"></i>
+                </button>
+                <div class="invalid-feedback">
+                  <i class="fas fa-exclamation-triangle me-1"></i><span data-i18n="validation.password_required">كلمة المرور مطلوبة (6 أحرف على الأقل)</span>
+                </div>
+                <div class="valid-feedback">
+                  <i class="fas fa-check-circle me-1"></i><span data-i18n="validation.password_strong">كلمة مرور قوية</span>
+                </div>
+              </div>
             </div>
-            <div class="text-end">
-              <a href="#" class="text-decoration-none">Mot de passe oublié?</a>
+            
+            <!-- Remember Me & Forgot Password Row -->
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rememberMe">
+                  <label class="form-check-label text-muted" for="rememberMe">
+                    <i class="fas fa-remember me-1"></i><span data-i18n="form.remember_me">تذكرني</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-6 text-end">
+                <a href="#" class="text-decoration-none text-primary fw-semibold">
+                  <i class="fas fa-question-circle me-1"></i><span data-i18n="form.forgot_password">نسيت كلمة المرور؟</span>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Login Button -->
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-primary btn-lg py-3 fw-bold">
+                <i class="fas fa-sign-in-alt me-2"></i>
+                <span class="login-btn-text" data-i18n="form.login_button">تسجيل الدخول</span>
+                <div class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+                  <span class="visually-hidden" data-i18n="common.loading">جاري التحميل...</span>
+                </div>
+              </button>
+            </div>
+            
+            <!-- Divider -->
+            <div class="position-relative text-center mb-4">
+              <hr class="my-4">
+              <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small" data-i18n="form.or_login_with">
+                أو سجل الدخول باستخدام
+              </span>
+            </div>
+            
+            <!-- Social Login Buttons -->
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <button type="button" class="btn btn-outline-danger w-100 py-2">
+                  <i class="fab fa-google me-2"></i>Google
+                </button>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-outline-primary w-100 py-2">
+                  <i class="fab fa-facebook-f me-2"></i>Facebook
+                </button>
+              </div>
             </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-          <button type="submit" class="btn btn-primary">Se connecter</button>
+        
+        <!-- Footer -->
+        <div class="modal-footer bg-light border-0 text-center">
+          <div class="w-100">
+            <p class="text-muted mb-2" data-i18n="modal.login.no_account">ليس لديك حساب؟</p>
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">
+              <i class="fas fa-user-plus me-2"></i><span data-i18n="modal.login.create_account">إنشاء حساب جديد</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Sign Up Modal -->
+  <!-- Enhanced Sign Up Modal -->
   <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="signupModalLabel">Inscription</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="signupModalLabel" data-i18n="modal.signup.title">إنشاء حساب جديد</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق" data-i18n="[aria-label]common.close"></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3">
-            <!-- Informations personnelles -->
-            <h6 class="col-12">Informations personnelles</h6>
+          <!-- Welcome Message -->
+          <div class="text-center mb-4">
+            <p class="text-muted" data-i18n="modal.signup.welcome">انضم إلى عائلة المؤسسة الاستشفائية المتخصصة للأم والطفل</p>
+            <div class="progress mb-3 signup-progress-container">
+              <div class="progress-bar bg-gradient signup-progress-bar" role="progressbar" id="signupProgress"></div>
+            </div>
+          </div>
+          
+          <form class="row g-3" id="signupForm">
+            <!-- Personal Information -->
+            <h6 class="col-12" data-i18n="form.personal_info">المعلومات الشخصية</h6>
             <div class="col-md-6">
-              <label for="signup-firstname" class="form-label">Prénom</label>
-              <input type="text" class="form-control" id="signup-firstname" required>
+              <label for="signup-firstname" class="form-label" data-i18n="form.first_name">الاسم الأول</label>
+              <input type="text" class="form-control" id="signup-firstname" data-i18n="[placeholder]form.first_name_placeholder" placeholder="أدخل اسمك الأول" required>
+              <div class="invalid-feedback" data-i18n="validation.first_name_required">الاسم الأول مطلوب</div>
             </div>
             <div class="col-md-6">
-              <label for="signup-lastname" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="signup-lastname" required>
+              <label for="signup-lastname" class="form-label" data-i18n="form.last_name">اسم العائلة</label>
+              <input type="text" class="form-control" id="signup-lastname" data-i18n="[placeholder]form.last_name_placeholder" placeholder="أدخل اسم العائلة" required>
+              <div class="invalid-feedback" data-i18n="validation.last_name_required">اسم العائلة مطلوب</div>
             </div>
             <div class="col-md-6">
-              <label for="signup-birthdate" class="form-label">Date de naissance</label>
+              <label for="signup-birthdate" class="form-label" data-i18n="form.birth_date">تاريخ الميلاد</label>
               <input type="date" class="form-control" id="signup-birthdate" required>
+              <div class="invalid-feedback" data-i18n="validation.birth_date_required">تاريخ الميلاد مطلوب</div>
             </div>
             <div class="col-md-6">
-              <label for="signup-gender" class="form-label">Genre</label>
+              <label for="signup-gender" class="form-label" data-i18n="form.gender">الجنس</label>
               <select class="form-select" id="signup-gender" required>
-                <option value="">Choisir...</option>
-                <option value="M">Masculin</option>
-                <option value="F">Féminin</option>
+                <option value="" data-i18n="form.select_gender">اختر...</option>
+                <option value="M" data-i18n="form.male">ذكر</option>
+                <option value="F" data-i18n="form.female">أنثى</option>
               </select>
+              <div class="invalid-feedback" data-i18n="validation.gender_required">يرجى اختيار الجنس</div>
             </div>
 
-            <!-- Contact -->
-            <h6 class="col-12 mt-3">Coordonnées</h6>
+            <!-- Contact Information -->
+            <h6 class="col-12 mt-3" data-i18n="form.contact_info">معلومات الاتصال</h6>
             <div class="col-md-6">
-              <label for="signup-email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="signup-email" required>
+              <label for="signup-email" class="form-label" data-i18n="form.email">البريد الإلكتروني</label>
+              <input type="email" class="form-control" id="signup-email" data-i18n="[placeholder]form.email_placeholder" placeholder="example@email.com" required>
+              <div class="invalid-feedback" data-i18n="validation.email_invalid">يرجى إدخال بريد إلكتروني صحيح</div>
             </div>
             <div class="col-md-6">
-              <label for="signup-phone" class="form-label">Téléphone</label>
-              <input type="tel" class="form-control" id="signup-phone" required>
+              <label for="signup-phone" class="form-label" data-i18n="form.phone">رقم الهاتف</label>
+              <input type="tel" class="form-control" id="signup-phone" data-i18n="[placeholder]form.phone_placeholder" placeholder="+213 XX XX XX XX" required>
+              <div class="invalid-feedback" data-i18n="validation.phone_required">رقم الهاتف مطلوب</div>
             </div>
             <div class="col-12">
-              <label for="signup-address" class="form-label">Adresse</label>
-              <input type="text" class="form-control" id="signup-address" required>
+              <label for="signup-address" class="form-label" data-i18n="form.address">العنوان</label>
+              <input type="text" class="form-control" id="signup-address" data-i18n="[placeholder]form.address_placeholder" placeholder="أدخل عنوانك الكامل" required>
+              <div class="invalid-feedback" data-i18n="validation.address_required">العنوان مطلوب</div>
             </div>
 
-            <!-- Informations médicales -->
-            <h6 class="col-12 mt-3">Informations médicales</h6>
+            <!-- Medical Information -->
+            <h6 class="col-12 mt-3" data-i18n="form.medical_info">المعلومات الطبية</h6>
             <div class="col-md-6">
-              <label for="signup-blood" class="form-label">Groupe sanguin</label>
+              <label for="signup-blood" class="form-label" data-i18n="form.blood_type">فصيلة الدم</label>
               <select class="form-select" id="signup-blood">
-                <option value="">Choisir...</option>
+                <option value="" data-i18n="form.select_blood_type">اختر...</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -255,203 +388,519 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label for="signup-allergies" class="form-label">Allergies</label>
-              <input type="text" class="form-control" id="signup-allergies" placeholder="Optionnel">
+              <label for="signup-allergies" class="form-label" data-i18n="form.allergies">الحساسية</label>
+              <input type="text" class="form-control" id="signup-allergies" data-i18n="[placeholder]form.allergies_placeholder" placeholder="اختياري - أدخل أي حساسية لديك">
             </div>
 
-            <!-- Mot de passe -->
-            <h6 class="col-12 mt-3">Sécurité</h6>
+            <!-- Security -->
+            <h6 class="col-12 mt-3" data-i18n="form.security">الأمان</h6>
             <div class="col-md-6">
-              <label for="signup-password" class="form-label">Mot de passe</label>
-              <input type="password" class="form-control" id="signup-password" required>
-              <div class="form-text">Minimum 8 caractères, incluant majuscules, minuscules et chiffres</div>
+              <label for="signup-password" class="form-label" data-i18n="form.password">كلمة المرور</label>
+              <div class="position-relative">
+                <input type="password" class="form-control" id="signup-password" data-i18n="[placeholder]form.password_placeholder" placeholder="أدخل كلمة مرور قوية" required>
+                <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y password-toggle-button" id="toggleSignupPassword">
+                  <i class="fas fa-eye" id="signupEyeIcon"></i>
+                </button>
+              </div>
+              <div class="form-text" data-i18n="form.password_requirements">على الأقل 8 أحرف، تتضمن أحرف كبيرة وصغيرة وأرقام</div>
+              <div class="invalid-feedback" data-i18n="validation.password_min_length">كلمة المرور يجب أن تكون 8 أحرف على الأقل</div>
+              <!-- Password Strength Indicator -->
+              <div class="password-strength mt-2">
+                <div class="progress password-strength-container">
+                  <div class="progress-bar password-strength-bar" id="passwordStrength" role="progressbar"></div>
+                </div>
+                <small class="text-muted" id="passwordStrengthText" data-i18n="form.password_strength">قوة كلمة المرور</small>
+              </div>
             </div>
             <div class="col-md-6">
-              <label for="signup-confirm-password" class="form-label">Confirmer le mot de passe</label>
-              <input type="password" class="form-control" id="signup-confirm-password" required>
+              <label for="signup-confirm-password" class="form-label" data-i18n="form.confirm_password">تأكيد كلمة المرور</label>
+              <input type="password" class="form-control" id="signup-confirm-password" data-i18n="[placeholder]form.confirm_password_placeholder" placeholder="أعد إدخال كلمة المرور" required>
+              <div class="invalid-feedback" data-i18n="validation.password_mismatch">كلمات المرور غير متطابقة</div>
             </div>
 
-            <!-- Conditions -->
+            <!-- Terms and Conditions -->
             <div class="col-12 mt-3">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="signup-terms" required>
-                <label class="form-check-label" for="signup-terms">
-                  J'accepte les conditions d'utilisation et la politique de confidentialité
+                <label class="form-check-label" for="signup-terms" data-i18n="form.agree_terms">
+                  أوافق على <a href="#" class="text-decoration-none" data-i18n="form.terms_of_use">شروط الاستخدام</a> و <a href="#" class="text-decoration-none" data-i18n="form.privacy_policy">سياسة الخصوصية</a>
+                </label>
+                <div class="invalid-feedback" data-i18n="validation.terms_required">يجب الموافقة على الشروط والأحكام</div>
+              </div>
+              
+              <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" id="signup-newsletter">
+                <label class="form-check-label" for="signup-newsletter" data-i18n="form.subscribe_newsletter">
+                  أرغب في تلقي النشرة الإخبارية والتحديثات الطبية
                 </label>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" class="btn btn-primary">S'inscrire</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i><span data-i18n="form.cancel">إلغاء</span>
+          </button>
+          <button type="submit" class="btn btn-primary" form="signupForm">
+            <i class="fas fa-user-plus me-2"></i><span data-i18n="form.create_account">إنشاء الحساب</span>
+          </button>
+        </div>
+        
+        <!-- Login link -->
+        <div class="text-center pb-3">
+          <small class="text-muted">
+            <span data-i18n="modal.signup.already_have_account">لديك حساب بالفعل؟</span>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" class="text-decoration-none fw-bold" data-i18n="modal.signup.login_link">تسجيل الدخول</a>
+          </small>
         </div>
       </div>
     </div>
   </div>
 
     <!-- Arrow buttons -->
-    <button class="hero-arrow hero-arrow-left" id="hero-arrow-left" aria-label="Précédent">
+    <button class="hero-arrow hero-arrow-left" id="hero-arrow-left" aria-label="Précédent" data-i18n="[aria-label]hero.previous">
       <i class="fa fa-chevron-left"></i>
     </button>
-    <button class="hero-arrow hero-arrow-right" id="hero-arrow-right" aria-label="Suivant">
+    <button class="hero-arrow hero-arrow-right" id="hero-arrow-right" aria-label="Suivant" data-i18n="[aria-label]hero.next">
       <i class="fa fa-chevron-right"></i>
     </button>
     <div class="hero-content relative z-10 text-center">
-      <h1 id="hero-title" class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">Bienvenue à la Clinique Pasteur</h1>
-      <p id="hero-desc" class="text-lg md:text-2xl text-white mb-6">Des soins modernes avec une touche humaine</p>
-      <button class="btn btn-primary px-6 py-2 rounded-full shadow-lg font-semibold" id="hero-btn">Prendre rendez-vous</button>
     </div>
     <!-- Hero info box moved to side -->
     <div class="hero-info-box-side">
-      <h3 class="hero-info-title" id="hero-info-title">Découvrez nos spécialités</h3>
-      <p class="hero-info-text" id="hero-info-text">La Clinique Pasteur propose une gamme complète de soins médicaux et chirurgicaux adaptés à tous les besoins.</p>
-      <button class="btn btn-info hero-info-more" id="hero-info-more">En savoir plus</button>
+      <h3 class="hero-info-title" id="heroInfoTitle">Découvrez nos spécialités</h3>
+      <p class="hero-info-text" id="heroInfoText">La Clinique Pasteur propose une gamme complète de soins médicaux et chirurgicaux adaptés à tous les besoins.</p>
+      <button class="btn btn-info hero-info-more" id="heroInfoMore">En savoir plus</button>
     </div>
   </header>
 
-  <!-- Services Section -->
-  <section class="container py-5" id="services-section">
-    <h2 class="text-center mb-8 text-3xl font-bold text-gray-800 dark:text-gray-100" id="services-title">Nos Services</h2>
-    <div class="row flex flex-wrap justify-center gap-8">
-      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <i class="fa fa-user-md fa-3x mb-2 text-primary"></i>
-        <h5 id="service-consult" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Consultations</h5>
-        <p id="service-consult-desc" class="text-gray-700 dark:text-gray-300">Consultations médicales spécialisées pour tous les âges.</p>
-      </div>
-      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <i class="fa fa-heartbeat fa-3x mb-2 text-danger"></i>
-        <h5 id="service-emergency" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Urgences</h5>
-        <p id="service-emergency-desc" class="text-gray-700 dark:text-gray-300">Service d'urgence disponible 24h/24 et 7j/7.</p>
-      </div>
-      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <i class="fa fa-flask fa-3x mb-2 text-success"></i>
-        <h5 id="service-lab" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Laboratoire</h5>
-        <p id="service-lab-desc" class="text-gray-700 dark:text-gray-300">Analyses médicales et biologiques rapides et fiables.</p>
+  <!-- Let Us Help Section -->
+  <section class="let-us-help-section py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title mb-4" id="letUsHelpTitle">Let Us Help</h2>
+          <p class="section-subtitle mb-5" id="letUsHelpSubtitle">Simply tell us who you are and what you want to do below.</p>
+          
+          <div class="help-selector-card">
+            <div class="patient-type-selector mb-4">
+              <label class="selector-label" id="helpIam">I'm a</label>
+              <div class="btn-group patient-type-group" role="group">
+                <input type="radio" class="btn-check" name="patientType" id="patient" autocomplete="off" checked>
+                <label class="btn btn-outline-primary patient-type-btn" for="patient">
+                  <i class="fas fa-user-injured me-2"></i><span id="helpPatient">Patient</span>
+                </label>
+                <input type="radio" class="btn-check" name="patientType" id="visitor" autocomplete="off">
+                <label class="btn btn-outline-primary patient-type-btn" for="visitor">
+                  <i class="fas fa-users me-2"></i><span id="helpVisitor">Visitor</span>
+                </label>
+                <input type="radio" class="btn-check" name="patientType" id="healthcare" autocomplete="off">
+                <label class="btn btn-outline-primary patient-type-btn" for="healthcare">
+                  <i class="fas fa-user-md me-2"></i><span id="helpHealthcareProfessional">Healthcare Professional</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="looking-for-selector mb-4">
+              <label class="selector-label" id="helpLookingFor">looking for</label>
+              <div class="dropdown looking-for-dropdown">
+                <button class="btn btn-primary dropdown-toggle looking-for-btn" type="button" data-bs-toggle="dropdown" id="helpFindBtn">
+                  <i class="fas fa-search me-2"></i><span id="helpFindDoctor">Find a Doctor</span>
+                </button>
+                <ul class="dropdown-menu looking-for-menu">
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-user-md me-2"></i><span id="helpFindDoctorItem">Find a Doctor</span></a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i><span id="helpBookAppointment">Book Appointment</span></a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-hospital me-2"></i><span id="helpFindServices">Find Services</span></a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-map-marker-alt me-2"></i><span id="helpGetDirections">Get Directions</span></a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-phone me-2"></i><span id="helpContactUs">Contact Us</span></a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <button class="btn btn-success btn-lg help-submit-btn" id="helpGetHelpBtn">
+              <i class="fas fa-arrow-right me-2"></i><span id="helpGetHelp">Get Help</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Services Section -->
+  <section class="container py-5" id="services-section">
+  </section>
+
   <!-- Doctors Section (now specialties with icons, no humans) -->
   <section class="container py-5" id="doctors-section">
-    <h2 class="text-center mb-4" id="doctors-title">Nos Spécialités</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-3 text-center mb-4">
-        <i class="fa fa-heart fa-4x mb-2 text-danger"></i>
-        <h6 class="specialty-title">Cardiologie</h6>
-        <p class="specialty-desc">Soins du cœur et des vaisseaux.</p>
+  </section>
+
+  <!-- Recent News Section -->
+  <section class="recent-news-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-5 section-title" id="recentNewsTitle">Recent News</h2>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="news-card">
+            <div class="news-image">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=400&q=80" alt="Medical Research" class="img-fluid">
+              <div class="news-date" id="newsDate1">Jan 15, 2025</div>
+            </div>
+            <div class="news-content">
+              <h5 class="news-title" id="newsTitle1">New Maternal Care Unit Opens</h5>
+              <p class="news-excerpt" id="newsExcerpt1">Our state-of-the-art maternal care unit is now open, featuring advanced monitoring systems and comfortable family rooms.</p>
+              <a href="#" class="news-link" id="newsLink1">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="news-card">
+            <div class="news-image">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=400&q=80" alt="Pediatric Care" class="img-fluid">
+              <div class="news-date" id="newsDate2">Jan 10, 2025</div>
+            </div>
+            <div class="news-content">
+              <h5 class="news-title" id="newsTitle2">Pediatric Vaccination Drive</h5>
+              <p class="news-excerpt" id="newsExcerpt2">Join our community vaccination program to protect your children with the latest immunizations and health screenings.</p>
+              <a href="#" class="news-link" id="newsLink2">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="news-card">
+            <div class="news-image">
+              <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&q=80" alt="Health Technology" class="img-fluid">
+              <div class="news-date" id="newsDate3">Jan 5, 2025</div>
+            </div>
+            <div class="news-content">
+              <h5 class="news-title" id="newsTitle3">Advanced Diagnostic Equipment</h5>
+              <p class="news-excerpt" id="newsExcerpt3">We've invested in cutting-edge diagnostic technology to provide faster, more accurate results for our patients.</p>
+              <a href="#" class="news-link" id="newsLink3">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 text-center mb-4">
-        <i class="fa fa-child fa-4x mb-2 text-primary"></i>
-        <h6 class="specialty-title">Pédiatrie</h6>
-        <p class="specialty-desc">Santé des enfants et adolescents.</p>
+    </div>
+  </section>
+
+  <!-- Recently Searched Conditions Section -->
+  <section class="searched-conditions-section py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 section-title" id="searchedConditionsTitle">Recently Searched Conditions</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="conditions-grid">
+            <a href="#" class="condition-tag">
+              <i class="fas fa-heart me-2"></i><span id="conditionPregnancyCare">Pregnancy Care</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-baby me-2"></i><span id="conditionPediatricCheckup">Pediatric Checkup</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-user-md me-2"></i><span id="conditionGynecology">Gynecology</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-stethoscope me-2"></i><span id="conditionGeneralMedicine">General Medicine</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-cut me-2"></i><span id="conditionSurgeryConsultation">Surgery Consultation</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-flask me-2"></i><span id="conditionLaboratoryTests">Laboratory Tests</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-heartbeat me-2"></i><span id="conditionEmergencyCare">Emergency Care</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-pills me-2"></i><span id="conditionMedicationReview">Medication Review</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-x-ray me-2"></i><span id="conditionRadiology">Radiology</span>
+            </a>
+            <a href="#" class="condition-tag">
+              <i class="fas fa-calendar-check me-2"></i><span id="conditionRoutineCheckup">Routine Checkup</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 text-center mb-4">
-        <i class="fa fa-user-nurse fa-4x mb-2 text-success"></i>
-        <h6 class="specialty-title">Chirurgie</h6>
-        <p class="specialty-desc">Interventions chirurgicales spécialisées.</p>
+    </div>
+  </section>
+
+  <!-- Our Featured Specialties Section -->
+  <section class="featured-specialties-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-5 section-title" id="featuredSpecialtiesTitle">Our Featured Specialties</h2>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-female"></i>
+            </div>
+            <h5 class="specialty-name" id="specialtyGynecologyName">Gynecology & Obstetrics</h5>
+            <p class="specialty-description" id="specialtyGynecologyDesc">Comprehensive women's health services including prenatal care, delivery, and gynecological treatments.</p>
+            <div class="specialty-features">
+              <span class="feature-badge" id="specialtyGynecologyFeature1">24/7 Delivery</span>
+              <span class="feature-badge" id="specialtyGynecologyFeature2">Expert Care</span>
+            </div>
+            <a href="#" class="specialty-link" id="specialtyGynecologyLink">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-child"></i>
+            </div>
+            <h5 class="specialty-name" id="specialtyPediatricsName">Pediatrics</h5>
+            <p class="specialty-description" id="specialtyPediatricsDesc">Specialized medical care for infants, children, and adolescents with experienced pediatricians.</p>
+            <div class="specialty-features">
+              <span class="feature-badge" id="specialtyPediatricsFeature1">Child-Friendly</span>
+              <span class="feature-badge" id="specialtyPediatricsFeature2">Vaccinations</span>
+            </div>
+            <a href="#" class="specialty-link" id="specialtyPediatricsLink">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-user-nurse"></i>
+            </div>
+            <h5 class="specialty-name" id="specialtySurgeryName">Surgery</h5>
+            <p class="specialty-description" id="specialtySurgeryDesc">Advanced surgical procedures with modern equipment and experienced surgical teams.</p>
+            <div class="specialty-features">
+              <span class="feature-badge" id="specialtySurgeryFeature1">Minimally Invasive</span>
+              <span class="feature-badge" id="specialtySurgeryFeature2">Expert Surgeons</span>
+            </div>
+            <a href="#" class="specialty-link" id="specialtySurgeryLink">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h5 class="specialty-name" id="specialtyEmergencyName">Emergency Care</h5>
+            <p class="specialty-description" id="specialtyEmergencyDesc">Round-the-clock emergency medical services with rapid response and critical care capabilities.</p>
+            <div class="specialty-features">
+              <span class="feature-badge" id="specialtyEmergencyFeature1">24/7 Available</span>
+              <span class="feature-badge" id="specialtyEmergencyFeature2">Rapid Response</span>
+            </div>
+            <a href="#" class="specialty-link" id="specialtyEmergencyLink">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section class="container py-5" id="contact-section">
-    <h2 class="text-center mb-4" id="contact-title">Contactez-nous</h2>
+    <h2 class="text-center mb-4" id="contactTitle">Contactez-nous</h2>
     <form class="row g-3 justify-content-center">
       <div class="col-md-6">
-        <input type="text" class="form-control" id="contact-name" placeholder="Votre nom">
+        <input type="text" class="form-control" id="contactName" placeholder="Votre nom">
       </div>
       <div class="col-md-6">
-        <input type="email" class="form-control" id="contact-email" placeholder="Votre email">
+        <input type="email" class="form-control" id="contactEmail" placeholder="Votre email">
       </div>
       <div class="col-12">
-        <textarea class="form-control" id="contact-message" rows="4" placeholder="Votre message"></textarea>
+        <textarea class="form-control" id="contactMessage" rows="4" placeholder="Votre message"></textarea>
       </div>
       <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary" id="contact-send">Envoyer</button>
+        <button type="submit" class="btn btn-primary" id="contactSend">Envoyer</button>
       </div>
     </form>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer bg-pink-600 text-white py-5 mt-5">
+  <!-- Enhanced Footer -->
+  <footer class="cus_footer bg-pink-600 text-white py-5 mt-5">
     <div class="container">
-      <div class="row g-4">
-        <!-- Contact Info -->
-        <div class="col-lg-4 mb-4">
-          <h5 class="mb-4 footer-title">Contact</h5>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-map-marker-alt me-3"></i>
-            <p class="mb-0">123 Rue de la Santé, Alger, Algérie</p>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-phone me-3"></i>
-            <p class="mb-0">+213 XX XX XX XX</p>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-envelope me-3"></i>
-            <p class="mb-0">contact@cliniquepasteur.dz</p>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-clock me-3"></i>
-            <p class="mb-0">24/7 - Services d'urgence<br>8h-17h - Consultations</p>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="col-lg-4 mb-4">
-          <h5 class="mb-4 footer-title">Liens Rapides</h5>
+      <div class="row">
+        <!-- Quick Links Section - SGH Style -->
+        <div class="col-xl-7 col-lg-6 col-md-12 col-12">
           <div class="row">
-            <div class="col-6">
+            <!-- Column 1: About & Contact -->
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 cus-footer_menu">
+              <h6 class="footer-section-title mb-3" id="footerClinicTitle">La Clinique</h6>
               <ul class="list-unstyled footer-links">
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Accueil</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Nos Services</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Équipe Médicale</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Rendez-vous</a></li>
+                <li><a href="#" class="footer-link" title="À Propos de Nous" id="footerAbout">À Propos de Nous</a></li>
+                <li><a href="#" class="footer-link" title="Nous Contacter" id="footerContact">Nous Contacter</a></li>
+                <li><a href="#" class="footer-link" title="Événements" id="footerEvents">Événements</a></li>
+                <li><a href="#" class="footer-link" title="Actualités" id="footerNews">Actualités</a></li>
               </ul>
             </div>
-            <div class="col-6">
+            
+            <!-- Column 2: Services & Careers -->
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 cus-footer_menu">
+              <h6 class="footer-section-title mb-3" id="footerServicesTitle">Services</h6>
               <ul class="list-unstyled footer-links">
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Urgences</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>FAQ</a></li>
-                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+                <li><a href="#" class="footer-link" title="Carrières" id="footerCareers">Carrières</a></li>
+                <li><a href="#" class="footer-link" title="Questions Fréquentes" id="footerFAQ">Questions Fréquentes</a></li>
+                <li><a href="#" class="footer-link" title="Urgences 24/7" id="footerEmergency24">Urgences 24/7</a></li>
+                <li><a href="#" class="footer-link" title="Laboratoire" id="footerLaboratory">Laboratoire</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 3: Specialties -->
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 cus-footer_menu">
+              <h6 class="footer-section-title mb-3" id="footerSpecialtiesTitle">Spécialités</h6>
+              <ul class="list-unstyled footer-links">
+                <li><a href="#" class="footer-link" title="Gynécologie" id="footerGynecology">Gynécologie</a></li>
+                <li><a href="#" class="footer-link" title="Pédiatrie" id="footerPediatrics">Pédiatrie</a></li>
+                <li><a href="#" class="footer-link" title="Obstétrique" id="footerObstetrics">Obstétrique</a></li>
+                <li><a href="#" class="footer-link" title="Rendez-vous" id="footerBookAppointment">Prendre RDV</a></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Newsletter & Social -->
-        <div class="col-lg-4 mb-4">
-          <h5 class="mb-4 footer-title">Restez Connecté</h5>
-          <p class="mb-4">Inscrivez-vous à notre newsletter pour recevoir les dernières actualités</p>
-          <div class="input-group mb-4">
-            <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
-            <button class="btn btn-light" type="button" aria-label="S'abonner" title="S'abonner"><i class="fas fa-paper-plane"></i></button>
+        <!-- Health Resources & Social Section -->
+        <div class="col-xl-5 col-lg-6 col-md-12 col-12">
+          <div class="row cus-no_intitution">
+            <!-- Health Resources - SGH Style -->
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 cus-large_badge">
+              <h6 class="footer-section-title mb-3" id="footerHealthTitle">Restez en Bonne Santé</h6>
+              <div class="cus-badge">
+                <a href="#" class="health-resource-link-enhanced" target="_blank" title="Centre de Santé Pasteur">
+                  <div class="resource-brand-wrapper">
+                    <div class="resource-icon">
+                      <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="resource-content">
+                      <div class="resource-title" id="healthResourceTitle1">Santé Pasteur</div>
+                      <div class="resource-subtitle" id="healthResourceSubtitle1">Centre de ressources</div>
+                    </div>
+                  </div>
+                  <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                </a>
+                
+                <a href="#" class="health-resource-link-enhanced" target="_blank" title="Vidéos Éducatives">
+                  <div class="resource-brand-wrapper">
+                    <div class="resource-icon">
+                      <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="resource-content">
+                      <div class="resource-title" id="healthResourceTitle2">Vidéos Santé</div>
+                      <div class="resource-subtitle" id="healthResourceSubtitle2">Éducation médicale</div>
+                    </div>
+                  </div>
+                  <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                </a>
+                
+                <a href="#" class="health-resource-link-enhanced" target="_blank" title="Guide Maternité">
+                  <div class="resource-brand-wrapper">
+                    <div class="resource-icon">
+                      <i class="fas fa-baby"></i>
+                    </div>
+                    <div class="resource-content">
+                      <div class="resource-title" id="healthResourceTitle3">Guide Maternité</div>
+                      <div class="resource-subtitle" id="healthResourceSubtitle3">Conseils experts</div>
+                    </div>
+                  </div>
+                  <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Social Media - SGH Professional Style -->
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 cus-social">
+              <div class="cus-social_badge">
+                <h6 class="footer-section-title mb-3" id="footerSocialTitle">Suivez Clinique Pasteur</h6>
+                <div class="social-professional-grid">
+                  <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-professional-link" title="Facebook">
+                    <div class="social-professional-icon">
+                      <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                  </a>
+                  
+                  <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="social-professional-link" title="YouTube">
+                    <div class="social-professional-icon">
+                      <i class="fab fa-youtube"></i>
+                    </div>
+                    <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                  </a>
+                  
+                  <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-professional-link" title="Instagram">
+                    <div class="social-professional-icon">
+                      <i class="fab fa-instagram"></i>
+                    </div>
+                    <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                  </a>
+                  
+                  <a href="https://www.twitter.com/" target="_blank" rel="noopener" class="social-professional-link" title="Twitter">
+                    <div class="social-professional-icon">
+                      <i class="fab fa-twitter"></i>
+                    </div>
+                    <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                  </a>
+                  
+                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="social-professional-link" title="LinkedIn">
+                    <div class="social-professional-icon">
+                      <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <span class="cmp-link__screen-reader-only">opens in a new tab</span>
+                  </a>
+                </div>
+                
+                <!-- Professional Contact Info -->
+                <div class="professional-contact mt-4">
+                  <div class="contact-item">
+                    <i class="fas fa-phone-alt me-2"></i>
+                    <span>+213 21 XX XX XX</span>
+                  </div>
+                  <div class="contact-item">
+                    <i class="fas fa-envelope me-2"></i>
+                    <span>contact@pasteur-alger.dz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="social-links">
-            <a href="#" class="text-white me-3 fs-5" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="text-white me-3 fs-5" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-white me-3 fs-5" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-white me-3 fs-5" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="text-white fs-5" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Address Section -->
+      <div class="cus-footer_address mt-4 pt-4 border-top">
+        <div class="d-flex align-items-start mb-3">
+          <i class="fas fa-map-marker-alt me-3 mt-1 text-success"></i>
+          <div>
+            <p class="mb-0" id="footerAddressLine1">Clinique Pasteur Audin — Mère & Fils Claudin,</p>
+            <p class="mb-0" id="footerAddressLine2">123 Rue de la Santé, Alger 16000, Algérie</p>
           </div>
         </div>
       </div>
 
       <!-- Bottom Footer -->
-      <div class="row mt-4 pt-4 border-top">
-        <div class="col-md-6 text-center text-md-start">
-          <p class="mb-0">&copy; 2025 Clinique Pasteur. Tous droits réservés.</p>
-        </div>
-        <div class="col-md-6 text-center text-md-end">
-          <a href="#" class="text-white text-decoration-none me-3">Mentions légales</a>
-          <a href="#" class="text-white text-decoration-none me-3">Confidentialité</a>
-          <a href="#" class="text-white text-decoration-none">CGU</a>
+      <div class="cus-footer_bottom">
+        <div class="row">
+          <div class="col-xl-7 col-lg-7 col-md-12">
+            <div class="cus-awards_block">
+              <p class="mb-0" id="footerCopyright">&copy; 2025 Clinique Pasteur Audin. Tous droits réservés.</p>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-5 col-md-12 cus-sub_footer_links">
+            <div class="d-flex flex-wrap">
+              <a href="#" class="text-white text-decoration-none me-3 mb-2" title="Conditions d'utilisation" id="footerTerms">Conditions d'utilisation</a>
+              <a href="#" class="text-white text-decoration-none me-3 mb-2" title="Plan du site" id="footerSitemap">Plan du site</a>
+            </div>
+            <div class="d-flex flex-wrap">
+              <a href="#" class="text-white text-decoration-none me-3 mb-2" title="Confidentialité" id="footerPrivacy">Confidentialité</a>
+              <a href="#" class="text-white text-decoration-none me-3 mb-2" title="Évaluez notre site" id="footerRateUs">Évaluez notre site</a>
+              <a href="#" class="text-white text-decoration-none me-3 mb-2" title="Signaler une vulnérabilité" id="footerReportVuln">Signaler une vulnérabilité</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back_top_top_wrapper">
+    <a href="javascript:void(0)" id="backToTop" class="back-to-top" aria-label="Retour en haut" title="Retour en haut" data-i18n="[aria-label]common.back_to_top" data-i18n="[title]common.back_to_top">
+      <svg class="icon__arrow-up" viewBox="0 0 24 24" width="24" height="24">
+        <title data-i18n="common.back_to_top">Retour en haut</title>
+        <path d="M18.71,11.71a1,1,0,0,1-1.42,0L13,7.41V19a1,1,0,0,1-2,0V7.41l-4.29,4.3a1,1,0,0,1-1.42-1.42l6-6a1,1,0,0,1,1.42,0l6,6A1,1,0,0,1,18.71,11.71Z"></path>
+      </svg>
+    </a>
+  </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
