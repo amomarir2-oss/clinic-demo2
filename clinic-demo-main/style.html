@@ -1,0 +1,465 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="site-title">Clinique Pasteur</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS File -->
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Main Header -->
+  <header class="main-header text-center py-3 bg-white shadow-sm sticky-top">
+    <h1 class="main-header-title mb-0">المؤسسة الاستشفائية المتخصصة للأم و الطفل للجزائر</h1>
+    <p class="main-header-desc">Santé, innovation et confiance à Alger</p>
+  </header>
+
+  <!-- Navbar (now sticky) -->
+  <nav class="navbar navbar-expand-lg bg-pink-600 dark:bg-gray-900 shadow-lg sticky-top">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100 font-bold" href="#">
+        <i class="fa-solid fa-hospital-user fa-2x me-2"></i>
+        <span id="site-brand">Clinique Pasteur Audin — Mère &amp; Fils Claudin, Alger</span>
+      </a>
+
+      <!-- Toggle (mobile) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Basculer la navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="menu-accueil">
+              <i class="fa fa-home"></i> <span>Accueil</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="presentationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-info-circle"></i> <span id="menu-presentation">Présentation</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="presentationDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-histoire">Notre histoire</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-equipe">Équipe</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="soinsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-stethoscope"></i> <span id="menu-soins">Offre de soins</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="soinsDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-consultations">Consultations</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-chirurgie">Chirurgie</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-urgences">Urgences</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-laboratoire">Laboratoire</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="actualiteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-newspaper"></i> <span id="menu-actualite">Actualité</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="actualiteDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-nouvelles">Nouvelles</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-evenements">Événements</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-envelope"></i> <span id="menu-contact">Contact</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="contactDropdown">
+              <li><a class="dropdown-item" href="#" id="menu-formulaire">Formulaire</a></li>
+              <li><a class="dropdown-item" href="#" id="menu-localisation">Localisation</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-warning text-dark ms-3" href="#" id="menu-rdv">
+              <i class="fa fa-calendar-check"></i> Demander un rendez-vous
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="btn btn-outline-light" aria-label="Changer de thème" title="Changer de thème">
+            <i class="fas fa-sun" id="theme-icon"></i>
+          </button>
+          <!-- Search -->
+          <div class="search-container position-relative" id="title-search" title="Rechercher">
+            <i class="fa fa-search search-icon"></i>
+            <input type="text" class="search-input" id="search-input" placeholder="Recherche...">
+          </div>
+
+          <!-- Language Selection -->
+          <div class="dropdown lang-selector" id="title-languages" title="Langues">
+            <button class="btn btn-outline-light main-lang-btn dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="main-flag" class="me-2">🇫🇷</span>
+              <span id="main-lang-label">Français</span>
+            </button>
+            <ul class="dropdown-menu lang-options">
+              <li>
+                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="fr">
+                  <span class="flag me-2">🇫🇷</span>
+                  <span class="lang-name">Français</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="en">
+                  <span class="flag me-2">🇬🇧</span>
+                  <span class="lang-name">English</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item lang-btn d-flex align-items-center" href="#" data-lang="ar">
+                  <span class="flag me-2">🇩🇿</span>
+                  <span class="lang-name">العربية</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login / Signup -->
+          <button class="btn btn-outline-light" title="Connexion" id="btn-login"><i class="fa fa-sign-in-alt"></i> Connexion</button>
+          <button class="btn btn-light text-dark" title="Inscription" id="btn-signup"><i class="fa fa-user-plus"></i> Inscription</button>
+
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sub-menu below navbar -->
+  <div class="sub-menu bg-white shadow-sm py-2 px-3 sticky-top">
+    <ul class="nav justify-content-center">
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-services" href="#services-section">Services</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-specialties" href="#doctors-section">Spécialités</a></li>
+      <li class="nav-item"><a class="nav-link sub-link" id="sub-contact" href="#contact-section">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero -->
+  <!-- Note: hero background set to cliniqueaudin as requested -->
+  <header class="hero-section hero-bg-maisons flex items-center justify-center h-[70vh] relative bg-cover bg-center">
+    <!-- indicators: small "balls" showing number of hero images; JS will populate these -->
+    <div id="hero-indicators" class="hero-indicators" aria-label="Carousel indicators"></div>
+  </header>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+            </div>
+            <div class="text-end">
+              <a href="#" class="text-decoration-none">Mot de passe oublié?</a>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-primary">Se connecter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Inscription</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3">
+            <!-- Informations personnelles -->
+            <h6 class="col-12">Informations personnelles</h6>
+            <div class="col-md-6">
+              <label for="signup-firstname" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="signup-firstname" required>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-lastname" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="signup-lastname" required>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-birthdate" class="form-label">Date de naissance</label>
+              <input type="date" class="form-control" id="signup-birthdate" required>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-gender" class="form-label">Genre</label>
+              <select class="form-select" id="signup-gender" required>
+                <option value="">Choisir...</option>
+                <option value="M">Masculin</option>
+                <option value="F">Féminin</option>
+              </select>
+            </div>
+
+            <!-- Contact -->
+            <h6 class="col-12 mt-3">Coordonnées</h6>
+            <div class="col-md-6">
+              <label for="signup-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="signup-email" required>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-phone" class="form-label">Téléphone</label>
+              <input type="tel" class="form-control" id="signup-phone" required>
+            </div>
+            <div class="col-12">
+              <label for="signup-address" class="form-label">Adresse</label>
+              <input type="text" class="form-control" id="signup-address" required>
+            </div>
+
+            <!-- Informations médicales -->
+            <h6 class="col-12 mt-3">Informations médicales</h6>
+            <div class="col-md-6">
+              <label for="signup-blood" class="form-label">Groupe sanguin</label>
+              <select class="form-select" id="signup-blood">
+                <option value="">Choisir...</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-allergies" class="form-label">Allergies</label>
+              <input type="text" class="form-control" id="signup-allergies" placeholder="Optionnel">
+            </div>
+
+            <!-- Mot de passe -->
+            <h6 class="col-12 mt-3">Sécurité</h6>
+            <div class="col-md-6">
+              <label for="signup-password" class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" id="signup-password" required>
+              <div class="form-text">Minimum 8 caractères, incluant majuscules, minuscules et chiffres</div>
+            </div>
+            <div class="col-md-6">
+              <label for="signup-confirm-password" class="form-label">Confirmer le mot de passe</label>
+              <input type="password" class="form-control" id="signup-confirm-password" required>
+            </div>
+
+            <!-- Conditions -->
+            <div class="col-12 mt-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="signup-terms" required>
+                <label class="form-check-label" for="signup-terms">
+                  J'accepte les conditions d'utilisation et la politique de confidentialité
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Arrow buttons -->
+    <button class="hero-arrow hero-arrow-left" id="hero-arrow-left" aria-label="Précédent">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="hero-arrow hero-arrow-right" id="hero-arrow-right" aria-label="Suivant">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+    <div class="hero-content relative z-10 text-center">
+      <h1 id="hero-title" class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">Bienvenue à la Clinique Pasteur</h1>
+      <p id="hero-desc" class="text-lg md:text-2xl text-white mb-6">Des soins modernes avec une touche humaine</p>
+      <button class="btn btn-primary px-6 py-2 rounded-full shadow-lg font-semibold" id="hero-btn">Prendre rendez-vous</button>
+    </div>
+    <!-- Hero info box moved to side -->
+    <div class="hero-info-box-side">
+      <h3 class="hero-info-title" id="hero-info-title">Découvrez nos spécialités</h3>
+      <p class="hero-info-text" id="hero-info-text">La Clinique Pasteur propose une gamme complète de soins médicaux et chirurgicaux adaptés à tous les besoins.</p>
+      <button class="btn btn-info hero-info-more" id="hero-info-more">En savoir plus</button>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section class="container py-5" id="services-section">
+    <h2 class="text-center mb-8 text-3xl font-bold text-gray-800 dark:text-gray-100" id="services-title">Nos Services</h2>
+    <div class="row flex flex-wrap justify-center gap-8">
+      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <i class="fa fa-user-md fa-3x mb-2 text-primary"></i>
+        <h5 id="service-consult" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Consultations</h5>
+        <p id="service-consult-desc" class="text-gray-700 dark:text-gray-300">Consultations médicales spécialisées pour tous les âges.</p>
+      </div>
+      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <i class="fa fa-heartbeat fa-3x mb-2 text-danger"></i>
+        <h5 id="service-emergency" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Urgences</h5>
+        <p id="service-emergency-desc" class="text-gray-700 dark:text-gray-300">Service d'urgence disponible 24h/24 et 7j/7.</p>
+      </div>
+      <div class="col-md-4 text-center mb-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <i class="fa fa-flask fa-3x mb-2 text-success"></i>
+        <h5 id="service-lab" class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Laboratoire</h5>
+        <p id="service-lab-desc" class="text-gray-700 dark:text-gray-300">Analyses médicales et biologiques rapides et fiables.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors Section (now specialties with icons, no humans) -->
+  <section class="container py-5" id="doctors-section">
+    <h2 class="text-center mb-4" id="doctors-title">Nos Spécialités</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-3 text-center mb-4">
+        <i class="fa fa-heart fa-4x mb-2 text-danger"></i>
+        <h6 class="specialty-title">Cardiologie</h6>
+        <p class="specialty-desc">Soins du cœur et des vaisseaux.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <i class="fa fa-child fa-4x mb-2 text-primary"></i>
+        <h6 class="specialty-title">Pédiatrie</h6>
+        <p class="specialty-desc">Santé des enfants et adolescents.</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <i class="fa fa-user-nurse fa-4x mb-2 text-success"></i>
+        <h6 class="specialty-title">Chirurgie</h6>
+        <p class="specialty-desc">Interventions chirurgicales spécialisées.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="container py-5" id="contact-section">
+    <h2 class="text-center mb-4" id="contact-title">Contactez-nous</h2>
+    <form class="row g-3 justify-content-center">
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="contact-name" placeholder="Votre nom">
+      </div>
+      <div class="col-md-6">
+        <input type="email" class="form-control" id="contact-email" placeholder="Votre email">
+      </div>
+      <div class="col-12">
+        <textarea class="form-control" id="contact-message" rows="4" placeholder="Votre message"></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" id="contact-send">Envoyer</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer bg-pink-600 text-white py-5 mt-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Contact Info -->
+        <div class="col-lg-4 mb-4">
+          <h5 class="mb-4 footer-title">Contact</h5>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-map-marker-alt me-3"></i>
+            <p class="mb-0">123 Rue de la Santé, Alger, Algérie</p>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-phone me-3"></i>
+            <p class="mb-0">+213 XX XX XX XX</p>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-envelope me-3"></i>
+            <p class="mb-0">contact@cliniquepasteur.dz</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-clock me-3"></i>
+            <p class="mb-0">24/7 - Services d'urgence<br>8h-17h - Consultations</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-4 mb-4">
+          <h5 class="mb-4 footer-title">Liens Rapides</h5>
+          <div class="row">
+            <div class="col-6">
+              <ul class="list-unstyled footer-links">
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Accueil</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Nos Services</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Équipe Médicale</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Rendez-vous</a></li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="list-unstyled footer-links">
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Urgences</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>FAQ</a></li>
+                <li><a href="#" class="text-white text-decoration-none mb-2 d-block"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter & Social -->
+        <div class="col-lg-4 mb-4">
+          <h5 class="mb-4 footer-title">Restez Connecté</h5>
+          <p class="mb-4">Inscrivez-vous à notre newsletter pour recevoir les dernières actualités</p>
+          <div class="input-group mb-4">
+            <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
+            <button class="btn btn-light" type="button" aria-label="S'abonner" title="S'abonner"><i class="fas fa-paper-plane"></i></button>
+          </div>
+          <div class="social-links">
+            <a href="#" class="text-white me-3 fs-5" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-white me-3 fs-5" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white me-3 fs-5" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white me-3 fs-5" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-white fs-5" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="row mt-4 pt-4 border-top">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2025 Clinique Pasteur. Tous droits réservés.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="text-white text-decoration-none me-3">Mentions légales</a>
+          <a href="#" class="text-white text-decoration-none me-3">Confidentialité</a>
+          <a href="#" class="text-white text-decoration-none">CGU</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="Scripts.js"></script>
+  
+</body>
+</html>
+  
+</body>
+</html>
