@@ -166,8 +166,19 @@ function initializeSettingsModal() {
   const highContrastToggle = document.getElementById('highContrastToggle');
   if (highContrastToggle) {
     highContrastToggle.addEventListener('change', function() {
-      document.body.classList.toggle('high-contrast', this.checked);
-      localStorage.setItem('highContrast', this.checked);
+      try {
+        document.body.classList.toggle('high-contrast', this.checked);
+        localStorage.setItem('highContrast', this.checked);
+        
+        // If high contrast breaks something, provide a way to disable it
+        if (this.checked) {
+          console.log('High contrast mode enabled. If the site appears broken, disable it in settings.');
+        }
+      } catch (error) {
+        console.error('Error applying high contrast:', error);
+        this.checked = false;
+        document.body.classList.remove('high-contrast');
+      }
     });
   }
   
@@ -323,6 +334,39 @@ function showSettingsSavedMessage() {
     }
   }, 3000);
 }
+
+// Emergency reset function for accessibility issues
+function resetAccessibilitySettings() {
+  try {
+    document.body.classList.remove('high-contrast', 'reduce-motion', 'font-small', 'font-large');
+    document.body.classList.add('font-medium');
+    localStorage.removeItem('highContrast');
+    localStorage.removeItem('reduceMotion');
+    localStorage.setItem('fontSize', 'medium');
+    
+    // Reset toggles in settings modal
+    const highContrastToggle = document.getElementById('highContrastToggle');
+    const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+    const fontMediumRadio = document.getElementById('fontMedium');
+    
+    if (highContrastToggle) highContrastToggle.checked = false;
+    if (reduceMotionToggle) reduceMotionToggle.checked = false;
+    if (fontMediumRadio) fontMediumRadio.checked = true;
+    
+    console.log('Accessibility settings reset to defaults');
+  } catch (error) {
+    console.error('Error resetting accessibility settings:', error);
+  }
+}
+
+// Add keyboard shortcut to reset accessibility (Ctrl+Alt+R)
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.altKey && e.key === 'r') {
+    e.preventDefault();
+    resetAccessibilitySettings();
+    showSettingsSavedMessage();
+  }
+});
 
 // Check for saved theme preference and set main button to current language
 document.addEventListener('DOMContentLoaded', () => {

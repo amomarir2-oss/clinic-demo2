@@ -3389,11 +3389,25 @@ body.rtl .search-input {
 
 /* High Contrast Mode */
 .high-contrast {
-  filter: contrast(150%) !important;
+  filter: contrast(120%) brightness(110%) !important;
 }
 
-.high-contrast * {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8) !important;
+.high-contrast .text-muted {
+  color: #495057 !important;
+}
+
+.high-contrast .btn {
+  border-width: 2px !important;
+}
+
+.high-contrast a {
+  text-decoration: underline !important;
+}
+
+.high-contrast .card,
+.high-contrast .modal-content {
+  border-width: 2px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Reduced Motion */
