@@ -11,8 +11,9 @@
   <!-- Font Awesome (icons) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- CSS File -->
+  <!-- CSS Files -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cookie-styles.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
@@ -36,6 +37,7 @@
       <button type="button" class="btn btn-warning guide-btn d-flex align-items-center ms-3 shadow-lg" id="btn-guide-top" title="Guide" aria-label="Guide" data-bs-toggle="modal" data-bs-target="#guideModal">
         <i class="fa fa-book me-2"></i>
         <span>Guide</span>
+        <span class="guide-badge">!</span>
       </button>
     </div>
   </header>
@@ -703,6 +705,40 @@
         </div>
         <div class="modal-body">
           
+          <!-- Cookie Settings -->
+          <div class="settings-section mb-4">
+            <h6 class="settings-section-title">
+              <i class="fas fa-cookie me-2 text-primary"></i>
+              <span data-i18n="settings.cookies.title">Cookie Settings</span>
+            </h6>
+            <div class="settings-item p-3 bg-light rounded mb-3">
+              <div class="cookie-settings">
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="necessaryCookies" checked disabled>
+                    <label class="form-check-label" for="necessaryCookies">
+                      Necessary Cookies (Required)
+                      <small class="d-block text-muted">Essential for website functionality</small>
+                    </label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="preferenceCookies">
+                    <label class="form-check-label" for="preferenceCookies">
+                      Preference Cookies
+                      <small class="d-block text-muted">Remember your settings and preferences</small>
+                    </label>
+                  </div>
+                </div>
+                <button class="btn btn-danger btn-sm mt-3" id="deleteCookies">
+                  <i class="fas fa-trash-alt me-2"></i>
+                  Delete All Cookies
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Theme Settings -->
           <div class="settings-section mb-4">
             <h6 class="settings-section-title">
@@ -1230,6 +1266,29 @@
     </div>
   </footer>
 
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-consent" id="cookieConsent">
+    <div class="cookie-content">
+      <div class="d-flex align-items-center mb-2">
+        <i class="fas fa-cookie-bite fa-2x me-3"></i>
+        <h5 class="m-0">Cookie Settings</h5>
+      </div>
+      <p>
+        We value your privacy! We use cookies to enhance your browsing experience, analyze site traffic, and provide personalized content.
+      </p>
+      <div class="d-flex flex-column gap-2">
+        <button class="btn btn-primary btn-sm w-100 d-flex align-items-center justify-content-center" id="acceptCookies">
+          <i class="fas fa-check me-2"></i>
+          Accept All Cookies
+        </button>
+        <button class="btn btn-outline-light btn-sm w-100 d-flex align-items-center justify-content-center" id="cookieSettings" data-bs-toggle="modal" data-bs-target="#settingsModal">
+          <i class="fas fa-cog me-2"></i>
+          Customize Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Back to Top Button -->
   <div class="back_top_top_wrapper">
     <a href="javascript:void(0)" id="backToTop" class="back-to-top" aria-label="Retour en haut" title="Retour en haut" data-i18n="[aria-label]common.back_to_top" data-i18n="[title]common.back_to_top">
@@ -1244,9 +1303,83 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Custom JS -->
   <script src="Scripts.js"></script>
+
+  <!-- Cookie Management Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cookieConsent = document.getElementById('cookieConsent');
+      const acceptCookies = document.getElementById('acceptCookies');
+      const preferenceCookies = document.getElementById('preferenceCookies');
+      const deleteCookiesBtn = document.getElementById('deleteCookies');
+      
+      // Check if user has already accepted cookies
+      if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => {
+          cookieConsent.classList.add('show');
+        }, 1000);
+      }
+
+      // Load saved preferences
+      preferenceCookies.checked = localStorage.getItem('preferenceCookies') === 'true';
+
+      // Accept cookies
+      acceptCookies.addEventListener('click', function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieConsent.classList.remove('show');
+      });
+
+      // Handle preference cookies
+      preferenceCookies.addEventListener('change', function() {
+        localStorage.setItem('preferenceCookies', this.checked);
+      });
+
+      // Delete all cookies
+      deleteCookiesBtn.addEventListener('click', function() {
+        // Clear localStorage
+        localStorage.clear();
+        
+        // Clear actual cookies
+        document.cookie.split(';').forEach(function(c) {
+          document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+        });
+        
+        // Reset checkboxes
+        preferenceCookies.checked = false;
+        
+        // Show success message
+        alert('All cookies have been deleted successfully!');
+        
+        // Show cookie consent banner again
+        cookieConsent.classList.add('show');
+      });
+    });
+  </script>
   
-</body>
-</html>
-  
+  <!-- Guide Button Badge Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const guideBtn = document.getElementById('btn-guide-top');
+      const guideBadge = guideBtn.querySelector('.guide-badge');
+      
+      // Check if the badge was previously hidden
+      if (localStorage.getItem('guideBadgeClicked') === 'true') {
+        guideBadge.style.display = 'none';
+      }
+      
+      guideBtn.addEventListener('click', function() {
+        // Fade out the badge
+        guideBadge.style.transition = 'opacity 0.3s ease-out';
+        guideBadge.style.opacity = '0';
+        
+        // Remove the badge after animation
+        setTimeout(() => {
+          guideBadge.style.display = 'none';
+        }, 300);
+        
+        // Store the state
+        localStorage.setItem('guideBadgeClicked', 'true');
+      });
+    });
+  </script>
 </body>
 </html>

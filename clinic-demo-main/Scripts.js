@@ -1,3 +1,32 @@
+// Cookie Consent Management
+document.addEventListener('DOMContentLoaded', function() {
+  const cookieConsent = document.getElementById('cookieConsent');
+  const acceptCookiesBtn = document.getElementById('acceptCookies');
+  
+  // Check if user has already accepted cookies
+  if (!localStorage.getItem('cookieConsent')) {
+    // Add a slight delay before showing for better effect
+    setTimeout(() => {
+      cookieConsent.classList.add('show');
+      // Add entrance sound effect (subtle)
+      const audio = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQwAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAASAAAZIAAVFRUVFRUVFSoqKioqKioqQEBAQEBAQEBVVVVVVVVVVWpqampqampqgICAgICAgICVlZWVlZWVlaurq6urq6urwMDAwMDAwMDV1dXV1dXV1erq6urq6urq//////////////////8AAAAOTGF2ZjU4LjEyLjEwMAAAAAAAAAAAAAAA/+NAwAAAAAAAAAAAAFhpbmcAAAAPAAAAEgAAGSAABQUFBQUFBQUKCgoKCgoKCg8PDw8PDw8PFBQUFBQUFBQZAAAAAAAA//////////////////////////////////////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAaWQQABzAAAGSBCyKxzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+      audio.volume = 0.2;  // Keep it subtle
+      audio.play().catch(() => {}); // Ignore errors if audio can't play
+    }, 1000);
+  }
+  
+  // Handle accept cookies button click with a nice fade out effect
+  acceptCookiesBtn.addEventListener('click', function() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    cookieConsent.style.transition = 'right 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease';
+    cookieConsent.style.opacity = '0';
+    setTimeout(() => {
+      cookieConsent.classList.remove('show');
+      cookieConsent.style.opacity = '';
+    }, 500);
+  });
+});
+
 // Optional: If you want to animate the search input on click
 document.querySelectorAll('.search-icon').forEach(icon => {
   icon.addEventListener('click', function() {
@@ -36,6 +65,17 @@ function updateLangSelector(lang) {
   }
 }
 
+// Debug helper: call debugToggleTheme() from console to cycle themes and verify cookie popup colors
+function debugToggleTheme() {
+  const themes = ['light', 'dark', 'amoled', 'blue-dark', 'medical', 'warm', 'nature'];
+  const current = (localStorage.getItem('selectedTheme') || 'light');
+  const idx = themes.indexOf(current);
+  const next = themes[(idx + 1) % themes.length];
+  applyTheme(next);
+  localStorage.setItem('selectedTheme', next);
+  console.info('Theme switched to', next);
+}
+
 // Top-level: mark a nav/submenu element active (used across scopes)
 function setActiveNav(element) {
   if (!element) return;
@@ -43,6 +83,32 @@ function setActiveNav(element) {
   document.querySelectorAll('.navbar .nav-link, .navbar .dropdown-item, .sub-menu .sub-link').forEach(el => el.classList.remove('active'));
   element.classList.add('active');
 }
+
+// Cookie Settings Management
+document.addEventListener('DOMContentLoaded', function() {
+  const preferenceCookies = document.getElementById('preferenceCookies');
+  const deleteCookiesBtn = document.getElementById('deleteCookies');
+
+  // Load saved preferences
+  if (localStorage.getItem('preferenceCookies') === 'true') {
+    preferenceCookies.checked = true;
+  }
+
+  // Handle preference cookies toggle
+  preferenceCookies.addEventListener('change', function() {
+    localStorage.setItem('preferenceCookies', this.checked);
+  });
+
+  // Handle delete all cookies button
+  deleteCookiesBtn.addEventListener('click', function() {
+    // Clear localStorage
+    localStorage.clear();
+    // Reset checkboxes
+    preferenceCookies.checked = false;
+    // Show cookie consent banner again
+    document.getElementById('cookieConsent').classList.add('show');
+  });
+});
 
 document.querySelectorAll('.lang-options .lang-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
@@ -299,10 +365,13 @@ function applyFontSize(size) {
 
 function applyTheme(theme) {
   // Remove all existing theme classes
-  document.body.classList.remove('dark-mode', 'theme-dark', 'theme-amoled', 'theme-blue-dark', 'theme-medical', 'theme-warm', 'theme-nature', 'theme-elegant');
-  
-  // Apply the selected theme
-  switch(theme) {
+  const themeClasses = ['theme-dark', 'theme-amoled', 'theme-blue-dark', 'theme-medical', 'theme-warm', 'theme-nature', 'theme-elegant'];
+  document.body.classList.remove(...themeClasses);
+  // Also remove legacy dark-mode
+  document.body.classList.remove('dark-mode');
+
+  // Apply the selected theme class and set data attributes for CSS compatibility
+  switch (theme) {
     case 'dark':
       document.body.classList.add('theme-dark');
       break;
@@ -328,6 +397,24 @@ function applyTheme(theme) {
     default:
       // Light theme is the default, no additional classes needed
       break;
+  }
+
+  // Set data attributes on <html> and <body> so both data-theme and data-bs-theme selectors work
+  try {
+    const root = document.documentElement;
+    if (theme === 'light' || !theme) {
+      root.removeAttribute('data-theme');
+      root.removeAttribute('data-bs-theme');
+      document.body.removeAttribute('data-theme');
+      document.body.removeAttribute('data-bs-theme');
+    } else {
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-bs-theme', theme === 'dark' ? 'dark' : 'light');
+      document.body.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-bs-theme', theme === 'dark' ? 'dark' : 'light');
+    }
+  } catch (e) {
+    // ignore DOM exceptions
   }
 }
 

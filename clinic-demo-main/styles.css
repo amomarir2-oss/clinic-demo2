@@ -49,6 +49,115 @@ body.dark-mode .cus-footer_menu {
   border-color: rgba(255,255,255,0.06) !important;
 }
 
+/* Guide Button Enhancement */
+.guide-btn {
+  position: relative;
+  overflow: visible !important;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+  background: linear-gradient(45deg, #ffc107, #ff9800) !important;
+}
+
+.guide-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff3333;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+/* Particles effect */
+.guide-btn::before,
+.guide-btn::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  animation: particles 2s linear infinite;
+  pointer-events: none;
+}
+
+.guide-btn::before {
+  left: -8px;
+  top: 50%;
+}
+
+.guide-btn::after {
+  right: -8px;
+  top: 50%;
+  animation-delay: 1s;
+}
+
+@keyframes particles {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Hover effects */
+.guide-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ff9800, #ff5722) !important;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
+}
+
+/* Click me hint */
+.guide-btn::before {
+  content: '👆 Click me!';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.guide-btn:hover::before {
+  opacity: 1;
+}
+
 /* Make sure elements that use .bg-white with opacity are dark as well */
 body.dark-mode [class*="bg-white"] {
   background: #000 !important;
@@ -82,44 +191,88 @@ body.dark-mode .btn-outline-light {
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
+}
 
 /* Highlighted Guide button styles */
-.guide-btn {
-  border-radius: 8px;
-  padding: 0.6rem 0.85rem;
-  font-weight: 700;
+#btn-guide-top.guide-btn, .guide-btn#btn-guide-top {
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-weight: 800;
   color: #1f1f1f !important;
-}
-
-/* Gentle pulse to draw attention */
-.guide-btn::after {
-  content: '';
+  background: linear-gradient(90deg, #ffd54a, #ffc107);
+  border: none !important;
+  box-shadow: 0 8px 18px rgba(255,193,7,0.24), 0 2px 6px rgba(0,0,0,0.12);
+  transform: translateY(0);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  font-size: 1.05rem;
   position: absolute;
-  right: 0.35rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.08);
+  z-index: 1100;
 }
 
+/* Float animation */
+@keyframes guideFloat {
+  0% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(-6px); }
+  100% { transform: translateY(-50%) translateY(0px); }
+}
+
+#btn-guide-top.guide-btn {
+  animation: guideFloat 3.6s ease-in-out infinite, guidePulse 2.8s infinite ease-in-out;
+}
+
+/* Hover/active emphasis */
+#btn-guide-top.guide-btn:hover {
+  transform: translateY(-50%) scale(1.06);
+  box-shadow: 0 14px 30px rgba(255,193,7,0.28), 0 6px 12px rgba(0,0,0,0.12);
+  filter: saturate(1.05);
+}
+
+#btn-guide-top.guide-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,235,59,0.12), rgba(255,193,7,0));
+  z-index: -1;
+}
+
+/* Gentle pulse (glow) */
 @keyframes guidePulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,193,7,0.2); }
+  0% { box-shadow: 0 0 0 0 rgba(255,193,7,0.18); }
   70% { box-shadow: 0 0 0 10px rgba(255,193,7,0); }
   100% { box-shadow: 0 0 0 0 rgba(255,193,7,0); }
 }
 
-.guide-btn {
-  animation: guidePulse 2.8s infinite ease-in-out;
+/* Small badge to attract clicks */
+#btn-guide-top .guide-badge {
+  background: #d84315;
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 0.18rem 0.42rem;
+  border-radius: 999px;
+  margin-left: 0.5rem;
+  box-shadow: 0 4px 10px rgba(216,67,21,0.18);
 }
 
 /* Modal specific tweaks for guide */
-#guideModal .modal-body { line-height: 1.5; }
+#guideModal .modal-body { line-height: 1.6; }
 #guideModal .modal-body h6 { margin-top: 1rem; }
 #guideModal .modal-body ul { margin-left: 1rem; }
 #guideModal .modal-body ol { margin-left: 1rem; }
-  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+
+/* Mobile: slightly smaller button and remove float animation */
+@media (max-width: 576px) {
+  #btn-guide-top.guide-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 48%;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.95rem;
+    animation: guidePulse 2.8s infinite ease-in-out;
+  }
 }
 
 .brand-secondary {
@@ -3650,6 +3803,116 @@ body.rtl .search-input {
 .settings-btn:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
   transform: rotate(90deg) !important;
+}
+
+/* Cookie Consent Banner */
+.cookie-consent {
+  position: fixed;
+  top: 50%;
+  right: -400px;
+  width: 380px;
+  padding: 1.5rem;
+  z-index: 1050;
+  transform: translateY(-50%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px 0 0 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cookie-consent.show {
+  right: 0;
+  animation: cookie-pulse 2s infinite;
+}
+
+/* Light theme pulse animation */
+[data-bs-theme="light"] .cookie-consent.show {
+  animation-name: cookie-pulse-light;
+}
+
+@keyframes cookie-pulse-light {
+  0% {
+    box-shadow: -5px 0 20px rgba(79, 172, 254, 0.2);
+  }
+  50% {
+    box-shadow: -5px 0 30px rgba(0, 242, 254, 0.3);
+  }
+  100% {
+    box-shadow: -5px 0 20px rgba(79, 172, 254, 0.2);
+  }
+}
+
+/* Dark theme pulse animation */
+[data-bs-theme="dark"] .cookie-consent.show {
+  animation-name: cookie-pulse-dark;
+}
+
+@keyframes cookie-pulse-dark {
+  0% {
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: -5px 0 30px rgba(52, 152, 219, 0.3);
+  }
+  100% {
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.cookie-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cookie-content p {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.cookie-content h5 {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-content .fa-cookie-bite {
+  color: #FFD700;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.cookie-consent .btn-light {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: #764BA2;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cookie-consent .btn-light:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-consent .btn-outline-secondary {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.cookie-consent .btn-outline-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+  font-size: 0.95rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Settings Modal Styling */
