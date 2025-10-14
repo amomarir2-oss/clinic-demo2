@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="siteTitle">Clinique Pasteur</title>
+  <title id="siteTitle">Clinique Pasteur</title> 
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,10 +32,11 @@
   <header class="main-header py-3 bg-white shadow-sm" id="main-header">
     <div class="container d-flex align-items-center">
       <h1 class="main-header-title mb-0" id="siteBrand">Specialized Medical Institute for Mother and Child</h1>
-      <a href="guide.html" class="btn btn-outline-primary guide-btn d-flex align-items-center ms-3" id="btn-guide-top" title="Guide" aria-label="Guide">
+      <!-- Highlighted Guide button opens an in-page modal for quick patient guidance -->
+      <button type="button" class="btn btn-warning guide-btn d-flex align-items-center ms-3 shadow-lg" id="btn-guide-top" title="Guide" aria-label="Guide" data-bs-toggle="modal" data-bs-target="#guideModal">
         <i class="fa fa-book me-2"></i>
         <span>Guide</span>
-      </a>
+      </button>
     </div>
   </header>
 
@@ -975,6 +976,72 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
           <button type="button" class="btn btn-primary" id="saveSettings" data-i18n="settings.save">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient & Newborn Guide Modal -->
+  <div class="modal fade" id="guideModal" tabindex="-1" aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title fw-bold" id="guideModalLabel"><i class="fa fa-book-open me-2"></i>Hospital Guide for Mother & Baby</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="lead">Quick checklist and practical guidance for mothers and newborns during your hospital visit and stay.</p>
+
+          <h6 class="mt-3">Before arrival — What the mother should bring</h6>
+          <ul>
+            <li>Valid ID and health insurance card/documentation.</li>
+            <li>Medical records and prenatal notes, list of medications and allergies.</li>
+            <li>Comfort items: loose, comfortable clothes, nightgown, socks, slippers, nursing bra, sanitary pads (maternity-grade), toothbrush/toiletries.</li>
+            <li>Phone and charger, a small pillow if desired, snacks for partner/companion.</li>
+            <li>Baby essentials: at least 2-3 newborn outfits, a warm blanket, diapers (newborn size), and a few receiving blankets.</li>
+          </ul>
+
+          <h6 class="mt-3">Safety & hospital policies</h6>
+          <ul>
+            <li>Follow hospital visiting hours and infection-control rules — wash or sanitize hands frequently.</li>
+            <li>Keep only one designated healthy companion where required; children and visitors with symptoms may be restricted.</li>
+            <li>Ask staff about emergency call procedures and who to contact for lactation support or neonatal concerns.</li>
+            <li>Use secure bassinets and never leave the baby unattended on beds or changing tables.</li>
+            <li>Ask which vaccines and screenings will be done before discharge (e.g., vitamin K, hepatitis B, newborn screening tests).</li>
+          </ul>
+
+          <h6 class="mt-3">Feeding — Breastfeeding & formula basics</h6>
+          <p class="mb-1">Breast milk provides optimal nutrition and immune protection. Staff can provide lactation support. If breastfeeding isn't possible, formula is a safe alternative when prepared correctly.</p>
+          <ul>
+            <li>Exclusive breastfeeding is recommended when possible. Ask for lactation consultant support early.</li>
+            <li>If using formula: use a commercially prepared infant formula; follow preparation and storage instructions carefully. Never use unmodified cow's milk for newborns.</li>
+            <li>Keep feeding supplies clean; sterilize bottles and nipples per hospital guidance.</li>
+            <li>Ask staff for guidance on feeding cues, frequency, and how to position the baby safely for feeds.</li>
+          </ul>
+
+          <h6 class="mt-3">Mom & baby important hospital items and services</h6>
+          <ul>
+            <li>Newborn screening and vaccinations: confirm which are scheduled before discharge.</li>
+            <li>Lactation support and breastfeeding classes — request consult if you need help.</li>
+            <li>Pain control and postpartum care plan for mother, including wound care and mobility guidance.</li>
+            <li>Discharge instructions: medications, follow-up appointments, emergency contact numbers, and warning signs to watch for in mother and baby.</li>
+            <li>Car seat check: many hospitals require a properly installed infant car seat for discharge — ask staff for assistance or inspection.</li>
+          </ul>
+
+          <h6 class="mt-3">Quick safety checklist before leaving</h6>
+          <ol>
+            <li>Confirm follow-up appointment with your obstetrician/pediatrician.</li>
+            <li>Verify baby's ID band matches parent's and car seat is correctly installed.</li>
+            <li>Review warning signs and who to call for fever, poor feeding, excessive bleeding, or respiratory difficulty.</li>
+            <li>Receive printed discharge instructions and prescriptions if needed.</li>
+          </ol>
+
+          <hr>
+          <p class="small text-muted mb-0">This guide provides general recommendations. For personalized medical advice, rely on your care team.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="documentation.html#postpartum" class="btn btn-primary">Read full postpartum guide</a>
         </div>
       </div>
     </div>
