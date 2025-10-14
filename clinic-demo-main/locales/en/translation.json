@@ -308,8 +308,19 @@
     "save": "Save Settings",
     "appearance": {
       "title": "Appearance",
+      "theme_selection": "Choose Theme",
       "dark_mode": "Dark Mode",
       "dark_mode_desc": "Switch between light and dark themes"
+    },
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "amoled": "AMOLED",
+      "blue_dark": "Blue Dark",
+      "medical": "Medical Blue",
+      "warm": "Warm",
+      "nature": "Nature",
+      "elegant": "Elegant"
     },
     "language": {
       "title": "Language",

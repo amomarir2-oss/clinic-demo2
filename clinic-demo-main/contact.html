@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تواصل معنا</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container d-flex align-items-center">
+      <a href="style.html" class="navbar-brand d-flex align-items-center text-dark">
+        <img src="logo-navbar.png" class="navbar-logo me-3" alt="logo">
+        <div class="brand-text">
+          <div class="brand-primary">المؤسسة الاستشفائية المتخصصة للأم والطفل</div>
+          <div class="brand-secondary">تواصل معنا</div>
+        </div>
+      </a>
+    </div>
+  </nav>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>اتصل بنا — مركز الرعاية</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container d-flex align-items-center">
+      <a href="style.html" class="navbar-brand d-flex align-items-center text-dark">
+        <img src="logo-navbar.png" class="navbar-logo me-3" alt="logo">
+        <div class="brand-text">
+          <div class="brand-primary">مركز الرعاية المتقدمة</div>
+        </div>
+      </a>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <section class="help-hero text-center mb-4">
+      <h1 class="mb-2">اتصل بنا</h1>
+      <p class="lead text-muted">فريقنا جاهز لمساعدتك — اتصل، راسل أو زر عيادتنا.</p>
+    </section>
+
+    <section class="help-card">
+      <h2>طرق الاتصال</h2>
+      <p><strong>الهاتف:</strong> <a href="tel:+21321000000">+213 21 000 000</a></p>
+      <p><strong>البريد الإلكتروني:</strong> <a href="mailto:contact@example.com">contact@example.com</a></p>
+      <p><strong>العنوان:</strong> شارع رئيسي، المدينة، الدولة — <a href="directions.html">كيفية الوصول</a></p>
+
+      <h3 class="mt-3">أرسل رسالة</h3>
+      <form id="contactForm" class="row g-3">
+        <div class="col-md-6"><input class="form-control" id="cname" placeholder="الاسم" required /></div>
+        <div class="col-md-6"><input class="form-control" id="cemail" placeholder="البريد الإلكتروني" /></div>
+        <div class="col-12"><textarea class="form-control" id="cmsg" rows="4" placeholder="رسالتك..."></textarea></div>
+        <div class="col-12 text-center"><button class="btn btn-primary" type="submit">إرسال</button></div>
+      </form>
+    </section>
+
+    <div class="text-center mt-4">
+      <a href="style.html" class="btn btn-outline">العودة للرئيسية</a>
+    </div>
+  </main>
+
+  <footer class="footer py-4 mt-5 text-center">
+    <div class="container">&copy; <span id="year"></span> مركز الرعاية</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('تم استلام رسالتك. سيتواصل معك فريق الدعم قريباً.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

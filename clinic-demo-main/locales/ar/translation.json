@@ -310,8 +310,19 @@
     "save": "حفظ الإعدادات",
     "appearance": {
       "title": "المظهر",
+      "theme_selection": "اختر المظهر",
       "dark_mode": "الوضع الليلي",
       "dark_mode_desc": "التبديل بين الوضع الفاتح والداكن"
+    },
+    "themes": {
+      "light": "فاتح",
+      "dark": "داكن",
+      "amoled": "أموليد",
+      "blue_dark": "أزرق داكن",
+      "medical": "أزرق طبي",
+      "warm": "دافئ",
+      "nature": "طبيعي",
+      "elegant": "أنيق"
     },
     "language": {
       "title": "اللغة",

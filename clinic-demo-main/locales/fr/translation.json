@@ -308,8 +308,19 @@
     "save": "Enregistrer les paramètres",
     "appearance": {
       "title": "Apparence",
+      "theme_selection": "Choisir le thème",
       "dark_mode": "Mode sombre",
       "dark_mode_desc": "Basculer entre les thèmes clair et sombre"
+    },
+    "themes": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "amoled": "AMOLED",
+      "blue_dark": "Bleu sombre",
+      "medical": "Bleu médical",
+      "warm": "Chaleureux",
+      "nature": "Nature",
+      "elegant": "Élégant"
     },
     "language": {
       "title": "Langue",

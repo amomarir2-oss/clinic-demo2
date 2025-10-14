@@ -19,15 +19,31 @@
   <!-- Scroll Progress Indicator -->
   <div class="scroll-indicator" id="scroll-indicator"></div>
   <!-- Main Header -->
-  <header class="main-header text-center py-3 bg-white shadow-sm" id="main-header">
-    <h1 class="main-header-title mb-0" id="siteBrand">Specialized Medical Institute for Mother and Child</h1>
+  <style>
+    /* Small helper: place guide button at extreme right of header */
+    #main-header { position: relative; }
+    #btn-guide-top { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); }
+    /* On small screens keep it visually consistent */
+    @media (max-width: 576px) {
+      #btn-guide-top { right: .5rem; padding-left: .6rem; padding-right: .6rem; }
+    }
+  </style>
+
+  <header class="main-header py-3 bg-white shadow-sm" id="main-header">
+    <div class="container d-flex align-items-center">
+      <h1 class="main-header-title mb-0" id="siteBrand">Specialized Medical Institute for Mother and Child</h1>
+      <a href="guide.html" class="btn btn-outline-primary guide-btn d-flex align-items-center ms-3" id="btn-guide-top" title="Guide" aria-label="Guide">
+        <i class="fa fa-book me-2"></i>
+        <span>Guide</span>
+      </a>
+    </div>
   </header>
 
   <!-- Navbar (dynamic sticky) -->
   <nav class="navbar navbar-expand-lg bg-pink-600 dark:bg-gray-900 shadow-lg" id="main-navbar">
     <div class="container-fluid">
       <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100" href="#">
+  <a class="navbar-brand d-flex align-items-center text-white dark:text-gray-100" href="style.html">
         <img src="logo-navbar.png" alt="Specialized Medical Institute for Mother and Child" class="navbar-logo me-3" id="logoAltTarget">
         <div class="brand-text">
           <div class="brand-primary" id="siteBrandShort">Specialized Medical Institute</div>
@@ -44,50 +60,55 @@
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#" id="menu-accueil">
+            <a class="nav-link" href="style.html" id="menu-accueil">
               <i class="fa fa-home"></i> <span id="menuAccueil">Accueil</span>
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="presentationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="services.html" id="presentationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-info-circle"></i> <span id="menuPresentation">Présentation</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="presentationDropdown">
-              <li><a class="dropdown-item" href="#" id="menuHistoire">Notre histoire</a></li>
-              <li><a class="dropdown-item" href="#" id="menuEquipe">Équipe</a></li>
+              <li><a class="dropdown-item" href="services.html#about" id="menuHistoire">Notre histoire</a></li>
+              <li><a class="dropdown-item" href="services.html#team" id="menuEquipe">Équipe</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="soinsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="services.html" id="soinsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-stethoscope"></i> <span id="menuSoins">Offre de soins</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="soinsDropdown">
-              <li><a class="dropdown-item" href="#" id="menuConsultations">Consultations</a></li>
-              <li><a class="dropdown-item" href="#" id="menuChirurgie">Chirurgie</a></li>
-              <li><a class="dropdown-item" href="#" id="menuUrgences">Urgences</a></li>
-              <li><a class="dropdown-item" href="#" id="menuLaboratoire">Laboratoire</a></li>
+              <li><a class="dropdown-item" href="services.html#consultations" id="menuConsultations">Consultations</a></li>
+              <li><a class="dropdown-item" href="services.html#surgery" id="menuChirurgie">Chirurgie</a></li>
+              <li><a class="dropdown-item" href="emergency.html" id="menuUrgences">Urgences</a></li>
+              <li><a class="dropdown-item" href="services.html#laboratory" id="menuLaboratoire">Laboratoire</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="actualiteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="info.html" id="actualiteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-newspaper"></i> <span id="menuActualite">Actualité</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="actualiteDropdown">
-              <li><a class="dropdown-item" href="#" id="menuNouvelles">Nouvelles</a></li>
-              <li><a class="dropdown-item" href="#" id="menuEvenements">Événements</a></li>
+              <li><a class="dropdown-item" href="info.html#news" id="menuNouvelles">Nouvelles</a></li>
+              <li><a class="dropdown-item" href="info.html#events" id="menuEvenements">Événements</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="contact.html" id="contactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-envelope"></i> <span id="menuContact">Contact</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="contactDropdown">
-              <li><a class="dropdown-item" href="#" id="menuFormulaire">Formulaire</a></li>
-              <li><a class="dropdown-item" href="#" id="menuLocalisation">Localisation</a></li>
+              <li><a class="dropdown-item" href="contact.html#form" id="menuFormulaire">Formulaire</a></li>
+              <li><a class="dropdown-item" href="directions.html" id="menuLocalisation">Localisation</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-warning text-dark ms-3 shadow-lg" href="#" id="menuRDV">
+            <a class="nav-link" href="documentation.html" id="menuDocumentation">
+              <i class="fa fa-book"></i> <span>Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-warning text-dark ms-3 shadow-lg" href="book-appointment.html" id="menuRDV">
               <i class="fa fa-calendar-check"></i> <span data-i18n="nav.request_appointment">طلب موعد</span>
             </a>
           </li>
@@ -95,12 +116,11 @@
 
         <!-- Right Actions -->
         <div class="navbar-actions d-flex align-items-center">
-          <!-- Search -->
-          <div class="search-container position-relative" id="titleSearch" title="Rechercher">
+          <!-- Search (inline with actions) -->
+          <div class="search-container position-relative me-2" id="titleSearch" title="Rechercher">
             <i class="fa fa-search search-icon"></i>
             <input type="text" class="search-input" id="searchInput" placeholder="Recherche..." aria-label="Rechercher">
           </div>
-
           <!-- Settings Button -->
           <button class="btn btn-outline-light settings-btn" data-bs-toggle="modal" data-bs-target="#settingsModal" aria-label="Settings" title="Settings">
             <i class="fas fa-cog"></i>
@@ -127,7 +147,7 @@
     <ul class="nav justify-content-center">
       <li class="nav-item"><a class="nav-link sub-link" id="sub-services" href="#services-section" data-i18n="submenu.services">Services</a></li>
       <li class="nav-item"><a class="nav-link sub-link" id="sub-specialties" href="#doctors-section" data-i18n="submenu.specialties">Spécialités</a></li>
-      <li class="nav-item"><a class="nav-link sub-link" id="sub-contact" href="#contact-section" data-i18n="submenu.contact">Contact</a></li>
+      <!-- Contact item removed as per user request -->
     </ul>
   </div>
 
@@ -167,7 +187,7 @@
                 <i class="fas fa-hospital text-primary fs-3 mb-2"></i>
               </div>
               <h6 class="card-title text-primary mb-1" data-i18n="modal.login.welcome">مرحباً بعودتك</h6>
-              <p class="card-text text-muted small mb-0" data-i18n="common.hospital_name">المؤسسة الاستشفائية المتخصصة للأم والطفل</p>
+              <p class="card-text text-muted small mb-0" data-i18n="common.hospital_name">مستشفى الأم والطفل</p>
             </div>
           </div>
           
@@ -459,7 +479,8 @@
               <label class="selector-label" id="helpIam">I'm a</label>
               <div class="btn-group patient-type-group" role="group">
                 <input type="radio" class="btn-check" name="patientType" id="patient" autocomplete="off" checked>
-                <label class="btn btn-outline-primary patient-type-btn" for="patient">
+                <!-- Clicking this label will navigate to healthcare.html (swapped destination) -->
+                <label class="btn btn-outline-primary patient-type-btn" for="patient" data-href="healthcare.html">
                   <i class="fas fa-user-injured me-2"></i><span id="helpPatient">Patient</span>
                 </label>
                 <input type="radio" class="btn-check" name="patientType" id="visitor" autocomplete="off">
@@ -467,7 +488,8 @@
                   <i class="fas fa-users me-2"></i><span id="helpVisitor">Visitor</span>
                 </label>
                 <input type="radio" class="btn-check" name="patientType" id="healthcare" autocomplete="off">
-                <label class="btn btn-outline-primary patient-type-btn" for="healthcare">
+                <!-- Clicking this label will navigate to patient.html (swapped destination) -->
+                <label class="btn btn-outline-primary patient-type-btn" for="healthcare" data-href="patient.html">
                   <i class="fas fa-user-md me-2"></i><span id="helpHealthcareProfessional">Healthcare Professional</span>
                 </label>
               </div>
@@ -489,6 +511,9 @@
               </div>
             </div>
             
+            <!-- Grid of quick-access options (populated by JS) -->
+            <!-- help options grid removed per user request -->
+
             <button class="btn btn-success btn-lg help-submit-btn" id="helpGetHelpBtn">
               <i class="fas fa-arrow-right me-2"></i><span id="helpGetHelp">Get Help</span>
             </button>
@@ -662,24 +687,7 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="container py-5" id="contact-section">
-    <h2 class="text-center mb-4" id="contactTitle">Contactez-nous</h2>
-    <form class="row g-3 justify-content-center">
-      <div class="col-md-6">
-        <input type="text" class="form-control" id="contactName" placeholder="Votre nom">
-      </div>
-      <div class="col-md-6">
-        <input type="email" class="form-control" id="contactEmail" placeholder="Votre email">
-      </div>
-      <div class="col-12">
-        <textarea class="form-control" id="contactMessage" rows="4" placeholder="Votre message"></textarea>
-      </div>
-      <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary" id="contactSend">Envoyer</button>
-      </div>
-    </form>
-  </section>
+  <!-- Contact Section removed by developer request -->
 
   <!-- Settings Modal -->
   <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
@@ -700,16 +708,130 @@
               <i class="fas fa-palette me-2 text-primary"></i>
               <span data-i18n="settings.appearance.title">Appearance</span>
             </h6>
-            <div class="settings-item d-flex justify-content-between align-items-center p-3 bg-light rounded">
-              <div>
-                <div class="fw-bold" data-i18n="settings.appearance.dark_mode">Dark Mode</div>
-                <small class="text-muted" data-i18n="settings.appearance.dark_mode_desc">Switch between light and dark themes</small>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="darkModeToggle">
-                <label class="form-check-label" for="darkModeToggle">
-                  <i class="fas fa-sun" id="theme-icon-modal"></i>
-                </label>
+            
+            <!-- Theme Selection -->
+            <div class="settings-item p-3 bg-light rounded mb-3">
+              <div class="fw-bold mb-3" data-i18n="settings.appearance.theme_selection">Choose Theme</div>
+              <div class="theme-grid">
+                <!-- Light Theme -->
+                <div class="theme-option" data-theme="light">
+                  <input type="radio" name="themeSelect" id="themeLight" value="light" checked>
+                  <label for="themeLight" class="theme-card">
+                    <div class="theme-preview light-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.light">Light</div>
+                  </label>
+                </div>
+                
+                <!-- Dark Theme -->
+                <div class="theme-option" data-theme="dark">
+                  <input type="radio" name="themeSelect" id="themeDark" value="dark">
+                  <label for="themeDark" class="theme-card">
+                    <div class="theme-preview dark-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.dark">Dark</div>
+                  </label>
+                </div>
+                
+                <!-- AMOLED Theme -->
+                <div class="theme-option" data-theme="amoled">
+                  <input type="radio" name="themeSelect" id="themeAmoled" value="amoled">
+                  <label for="themeAmoled" class="theme-card">
+                    <div class="theme-preview amoled-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.amoled">AMOLED</div>
+                  </label>
+                </div>
+                
+                <!-- Blue Dark Theme -->
+                <div class="theme-option" data-theme="blue-dark">
+                  <input type="radio" name="themeSelect" id="themeBlueDark" value="blue-dark">
+                  <label for="themeBlueDark" class="theme-card">
+                    <div class="theme-preview blue-dark-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.blue_dark">Blue Dark</div>
+                  </label>
+                </div>
+                
+                <!-- Medical Blue Theme -->
+                <div class="theme-option" data-theme="medical">
+                  <input type="radio" name="themeSelect" id="themeMedical" value="medical">
+                  <label for="themeMedical" class="theme-card">
+                    <div class="theme-preview medical-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.medical">Medical Blue</div>
+                  </label>
+                </div>
+                
+                <!-- Warm Theme -->
+                <div class="theme-option" data-theme="warm">
+                  <input type="radio" name="themeSelect" id="themeWarm" value="warm">
+                  <label for="themeWarm" class="theme-card">
+                    <div class="theme-preview warm-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.warm">Warm</div>
+                  </label>
+                </div>
+                
+                <!-- Nature Theme -->
+                <div class="theme-option" data-theme="nature">
+                  <input type="radio" name="themeSelect" id="themeNature" value="nature">
+                  <label for="themeNature" class="theme-card">
+                    <div class="theme-preview nature-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.nature">Nature</div>
+                  </label>
+                </div>
+                
+                <!-- Elegant Theme -->
+                <div class="theme-option" data-theme="elegant">
+                  <input type="radio" name="themeSelect" id="themeElegant" value="elegant">
+                  <label for="themeElegant" class="theme-card">
+                    <div class="theme-preview elegant-theme">
+                      <div class="theme-header"></div>
+                      <div class="theme-content">
+                        <div class="theme-text-line"></div>
+                        <div class="theme-text-line short"></div>
+                      </div>
+                    </div>
+                    <div class="theme-name" data-i18n="settings.themes.elegant">Elegant</div>
+                  </label>
+                </div>
               </div>
             </div>
           </div>

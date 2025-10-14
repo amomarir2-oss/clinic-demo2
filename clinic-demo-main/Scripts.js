@@ -36,6 +36,14 @@ function updateLangSelector(lang) {
   }
 }
 
+// Top-level: mark a nav/submenu element active (used across scopes)
+function setActiveNav(element) {
+  if (!element) return;
+  // Remove active from all relevant items
+  document.querySelectorAll('.navbar .nav-link, .navbar .dropdown-item, .sub-menu .sub-link').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+}
+
 document.querySelectorAll('.lang-options .lang-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -84,32 +92,38 @@ document.addEventListener('click', function(e) {
 
   // Check if clicked element is a navigation link or dropdown item
   if (e.target.classList.contains('nav-link') || e.target.classList.contains('dropdown-item')) {
+    // Immediately set active state for clicked nav item
+    const clickedNav = e.target.closest('.nav-link, .dropdown-item, .sub-link');
+    if (clickedNav) {
+      try { setActiveNav(clickedNav); } catch (_) {}
+    }
     // Skip for theme toggle button and language buttons
     const isThemeToggle = e.target.closest('#theme-toggle');
     const isLanguageBtn = e.target.classList.contains('lang-btn') || e.target.closest('.lang-btn');
     
     if (!isThemeToggle && !isLanguageBtn) {
-      e.preventDefault();
-      // Create a new page with white background
-      const newPage = window.open('', '_blank');
-      newPage.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Nouvelle Page</title>
-          <style>
-            body {
-              margin: 0;
-              padding: 0;
-              background-color: #ffffff;
-              min-height: 100vh;
-            }
-          </style>
-        </head>
-        <body></body>
-        </html>
-      `);
-      newPage.document.close();
+      // If the clicked nav item is a normal anchor with a real href, allow the browser to navigate.
+      const anchor = clickedNav.closest('a');
+      const href = anchor ? (anchor.getAttribute('href') || '').trim() : '';
+
+      // If href is a non-empty, non-placeholder link (not '#'), let it proceed normally.
+      if (href && href !== '#') {
+        // If it's an in-page hash, update the URL/hash and smooth-scroll to target if exists.
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          try {
+            history.replaceState(null, '', href);
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+          } catch (_) {}
+        } else {
+          // Allow normal navigation to proceed (same tab). Do not call preventDefault.
+          return;
+        }
+      } else {
+        // Placeholder or javascript-only hrefs: prevent default and do nothing (no blank page)
+        e.preventDefault();
+      }
     }
   }
 });
@@ -119,26 +133,46 @@ document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
 
 // Settings Modal Functionality
 document.addEventListener('DOMContentLoaded', function() {
+  // Clear any problematic settings first
+  clearProblematicSettings();
   // Initialize settings modal controls
   initializeSettingsModal();
+  // Ensure modals work properly
+  fixModalIssues();
 });
 
-function initializeSettingsModal() {
-  // Dark mode toggle in settings modal
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const themeIconModal = document.getElementById('theme-icon-modal');
-  
-  if (darkModeToggle) {
-    // Set initial state based on current theme
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    darkModeToggle.checked = isDarkMode;
-    updateThemeIcon(themeIconModal, isDarkMode);
-    
-    darkModeToggle.addEventListener('change', function() {
-      toggleTheme();
-      updateThemeIcon(themeIconModal, this.checked);
-    });
+function clearProblematicSettings() {
+  // Remove high contrast class and clear from localStorage
+  document.body.classList.remove('high-contrast');
+  try {
+    localStorage.removeItem('highContrast');
+  } catch (e) {
+    console.log('Could not clear localStorage');
   }
+}
+
+function fixModalIssues() {
+  // Ensure Bootstrap modals are properly initialized
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    // Remove any problematic styles that might hide modals
+    modal.style.display = '';
+    modal.style.visibility = '';
+    modal.style.opacity = '';
+  });
+}
+
+function initializeSettingsModal() {
+  // Theme selection in settings modal
+  const themeRadios = document.querySelectorAll('input[name="themeSelect"]');
+  themeRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        applyTheme(this.value);
+        localStorage.setItem('selectedTheme', this.value);
+      }
+    });
+  });
   
   // Language selection in settings modal
   const langRadios = document.querySelectorAll('.lang-radio');
@@ -166,19 +200,8 @@ function initializeSettingsModal() {
   const highContrastToggle = document.getElementById('highContrastToggle');
   if (highContrastToggle) {
     highContrastToggle.addEventListener('change', function() {
-      try {
-        document.body.classList.toggle('high-contrast', this.checked);
-        localStorage.setItem('highContrast', this.checked);
-        
-        // If high contrast breaks something, provide a way to disable it
-        if (this.checked) {
-          console.log('High contrast mode enabled. If the site appears broken, disable it in settings.');
-        }
-      } catch (error) {
-        console.error('Error applying high contrast:', error);
-        this.checked = false;
-        document.body.classList.remove('high-contrast');
-      }
+      document.body.classList.toggle('high-contrast', this.checked);
+      localStorage.setItem('highContrast', this.checked);
     });
   }
   
@@ -254,14 +277,73 @@ function updateThemeIcon(iconElement, isDarkMode) {
 }
 
 function applyFontSize(size) {
-  // Remove existing font size classes
+  // Keep classes for legacy selectors
   document.body.classList.remove('font-small', 'font-medium', 'font-large');
-  // Add new font size class
   document.body.classList.add(`font-${size}`);
+
+  // Set root font-size so we change actual layout text sizes (not browser zoom)
+  const root = document.documentElement;
+  switch (size) {
+    case 'small':
+      root.style.fontSize = '14px';
+      break;
+    case 'large':
+      root.style.fontSize = '18px';
+      break;
+    case 'medium':
+    default:
+      root.style.fontSize = '16px';
+      break;
+  }
+}
+
+function applyTheme(theme) {
+  // Remove all existing theme classes
+  document.body.classList.remove('dark-mode', 'theme-dark', 'theme-amoled', 'theme-blue-dark', 'theme-medical', 'theme-warm', 'theme-nature', 'theme-elegant');
+  
+  // Apply the selected theme
+  switch(theme) {
+    case 'dark':
+      document.body.classList.add('theme-dark');
+      break;
+    case 'amoled':
+      document.body.classList.add('theme-amoled');
+      break;
+    case 'blue-dark':
+      document.body.classList.add('theme-blue-dark');
+      break;
+    case 'medical':
+      document.body.classList.add('theme-medical');
+      break;
+    case 'warm':
+      document.body.classList.add('theme-warm');
+      break;
+    case 'nature':
+      document.body.classList.add('theme-nature');
+      break;
+    case 'elegant':
+      document.body.classList.add('theme-elegant');
+      break;
+    case 'light':
+    default:
+      // Light theme is the default, no additional classes needed
+      break;
+  }
 }
 
 function loadSavedSettings() {
   try {
+    // Remove any existing high contrast class first
+    document.body.classList.remove('high-contrast');
+    
+    // Load theme
+    const savedTheme = localStorage.getItem('selectedTheme') || 'light';
+    const themeRadio = document.querySelector(`input[name="themeSelect"][value="${savedTheme}"]`);
+    if (themeRadio) {
+      themeRadio.checked = true;
+      applyTheme(savedTheme);
+    }
+    
     // Load font size
     const savedFontSize = localStorage.getItem('fontSize') || 'medium';
     const fontSizeRadio = document.querySelector(`input[name="fontSize"][value="${savedFontSize}"]`);
@@ -270,12 +352,12 @@ function loadSavedSettings() {
       applyFontSize(savedFontSize);
     }
     
-    // Load high contrast
+    // Load high contrast - default to false
     const highContrast = localStorage.getItem('highContrast') === 'true';
     const highContrastToggle = document.getElementById('highContrastToggle');
     if (highContrastToggle) {
-      highContrastToggle.checked = highContrast;
-      document.body.classList.toggle('high-contrast', highContrast);
+      highContrastToggle.checked = false; // Force disable by default
+      document.body.classList.remove('high-contrast'); // Ensure it's removed
     }
     
     // Load reduce motion
@@ -335,39 +417,6 @@ function showSettingsSavedMessage() {
   }, 3000);
 }
 
-// Emergency reset function for accessibility issues
-function resetAccessibilitySettings() {
-  try {
-    document.body.classList.remove('high-contrast', 'reduce-motion', 'font-small', 'font-large');
-    document.body.classList.add('font-medium');
-    localStorage.removeItem('highContrast');
-    localStorage.removeItem('reduceMotion');
-    localStorage.setItem('fontSize', 'medium');
-    
-    // Reset toggles in settings modal
-    const highContrastToggle = document.getElementById('highContrastToggle');
-    const reduceMotionToggle = document.getElementById('reduceMotionToggle');
-    const fontMediumRadio = document.getElementById('fontMedium');
-    
-    if (highContrastToggle) highContrastToggle.checked = false;
-    if (reduceMotionToggle) reduceMotionToggle.checked = false;
-    if (fontMediumRadio) fontMediumRadio.checked = true;
-    
-    console.log('Accessibility settings reset to defaults');
-  } catch (error) {
-    console.error('Error resetting accessibility settings:', error);
-  }
-}
-
-// Add keyboard shortcut to reset accessibility (Ctrl+Alt+R)
-document.addEventListener('keydown', function(e) {
-  if (e.ctrlKey && e.altKey && e.key === 'r') {
-    e.preventDefault();
-    resetAccessibilitySettings();
-    showSettingsSavedMessage();
-  }
-});
-
 // Check for saved theme preference and set main button to current language
 document.addEventListener('DOMContentLoaded', () => {
   let initialLang = 'fr';
@@ -377,6 +426,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initialLang = document.documentElement.getAttribute('lang') || 'fr';
   }
   updateLangSelector(initialLang);
+  
+  // Wire click handlers to mark clicked link as active. We don't prevent existing behavior here.
+  document.querySelectorAll('.navbar .nav-link, .navbar .dropdown-item, .sub-menu .sub-link').forEach(el => {
+    el.addEventListener('click', function(e) {
+      try { setActiveNav(this); } catch (err) { /* ignore */ }
+
+      // If this link is an in-page anchor, update the hash so refresh/links reflect the active state
+      const href = this.getAttribute('href') || '';
+      if (href.startsWith('#')) {
+        try { history.replaceState(null, '', href); } catch (_) {}
+      }
+    });
+  });
+
+  // On load, set active item from location.hash when possible, otherwise pick the first nav-link
+  (function setInitialActiveFromHash() {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(`[href="${hash}"]`);
+      if (target) { setActiveNav(target); return; }
+    }
+    const first = document.querySelector('.navbar .nav-link');
+    if (first) setActiveNav(first);
+  })();
 });
 // Dark mode toggle (legacy button support if present)
 const toggleDark = document.getElementById("toggle-dark");
@@ -566,7 +639,7 @@ async function setLanguage(lang) {
   const featuredSpecialtiesTitle = document.getElementById('featuredSpecialtiesTitle');
   if (featuredSpecialtiesTitle && t.featuredSpecialtiesTitle) featuredSpecialtiesTitle.textContent = t.featuredSpecialtiesTitle;
   
-  // Update contact section
+  // Update contact section (removed from DOM in HTML). Keep guard in case it's re-added dynamically.
   const contactTitle = document.getElementById('contactTitle');
   if (contactTitle && t.contactTitle) contactTitle.textContent = t.contactTitle;
   
@@ -577,6 +650,7 @@ async function setLanguage(lang) {
   const subSpecialties = document.getElementById('sub-specialties');
   if (subSpecialties && t.subSpecialties) subSpecialties.textContent = t.subSpecialties;
   
+  // sub-contact nav item removed from HTML; keep a guard for dynamic insertion
   const subContact = document.getElementById('sub-contact');
   if (subContact && t.subContact) subContact.textContent = t.subContact;
   
@@ -797,6 +871,45 @@ async function setLanguage(lang) {
   
   const helpGetHelp = document.getElementById('helpGetHelp');
   if (helpGetHelp && t.helpGetHelp) helpGetHelp.textContent = t.helpGetHelp;
+
+  // If Arabic is active, reorder the patient-type buttons so their visual order matches RTL expectations
+  try {
+    const patientTypeGroup = document.querySelector('.patient-type-group');
+    if (patientTypeGroup) {
+      if (lang === 'ar') {
+        // reverse children order to present labels right-to-left
+        const children = Array.from(patientTypeGroup.children).reverse();
+        children.forEach(ch => patientTypeGroup.appendChild(ch));
+      } else {
+        // attempt to restore original order: patient, visitor, healthcare
+        const patient = patientTypeGroup.querySelector('[for="patient"]') || patientTypeGroup.querySelector('#patient') || null;
+        const visitor = patientTypeGroup.querySelector('[for="visitor"]') || patientTypeGroup.querySelector('#visitor') || null;
+        const healthcare = patientTypeGroup.querySelector('[for="healthcare"]') || patientTypeGroup.querySelector('#healthcare') || null;
+        // If we can find the elements by their labels, append in canonical order
+        if (patient && visitor && healthcare) {
+          // parent may contain inputs and labels; append in order patient input+label, visitor input+label, healthcare input+label
+          const nodes = Array.from(patientTypeGroup.childNodes);
+          // simple approach: collect nodes by searching for label[for=..] and inputs
+          const patientLabel = patientTypeGroup.querySelector('label[for="patient"]');
+          const visitorLabel = patientTypeGroup.querySelector('label[for="visitor"]');
+          const healthcareLabel = patientTypeGroup.querySelector('label[for="healthcare"]');
+          const patientInput = patientTypeGroup.querySelector('input#patient');
+          const visitorInput = patientTypeGroup.querySelector('input#visitor');
+          const healthcareInput = patientTypeGroup.querySelector('input#healthcare');
+          // Append in canonical order if labels exist
+          if (patientInput && patientLabel) patientTypeGroup.appendChild(patientInput);
+          if (patientLabel) patientTypeGroup.appendChild(patientLabel);
+          if (visitorInput && visitorLabel) patientTypeGroup.appendChild(visitorInput);
+          if (visitorLabel) patientTypeGroup.appendChild(visitorLabel);
+          if (healthcareInput && healthcareLabel) patientTypeGroup.appendChild(healthcareInput);
+          if (healthcareLabel) patientTypeGroup.appendChild(healthcareLabel);
+        }
+      }
+    }
+  } catch (err) {
+    // Non-fatal; ordering best-effort
+    console.log('Could not reorder patient-type buttons:', err);
+  }
   
   // Update dropdown menu items in help section
   const dropdownItems = document.querySelectorAll('.looking-for-menu .dropdown-item');
@@ -1221,15 +1334,12 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
   });
 });
 
-// Hero diaporama/slideshow effect
-// Using the two requested images:
-//  https://cliniqueaudin.com/wp-content/uploads/2025/06/Untitled-8888.jpg
-//  https://cliniquemaisonslaffitte.vivalto-sante.com/wp-content/uploads/2022/07/facade-exterieure-entree-urgences-clinique-de-maisons-laffitte.jpg
-// To use local files, save them to e.g. "assets/images/..." and replace the URLs below with "./assets/images/..."
+// Hero diaporama/slideshow effect (transform-based, RTL)
+// Images: remote URLs (preloaded to avoid flicker). To use local files, replace URLs with local paths.
 const heroSection = document.querySelector('.hero-section');
 const heroIndicatorsContainerId = 'hero-indicators';
 const heroImages = [
-  "EtbCld.jpg",
+  
   "https://cliniqueaudin.com/wp-content/uploads/2025/06/Untitled-8888.jpg",
   "https://cliniquemaisonslaffitte.vivalto-sante.com/wp-content/uploads/2022/07/facade-exterieure-entree-urgences-clinique-de-maisons-laffitte.jpg",
   "https://www.lonasante.com/wp-content/uploads/2025/02/Etablissements-de-sante-prives-et-cliniques-avec-specialites.jpg",
@@ -1238,24 +1348,72 @@ const heroImages = [
 ];
 let heroIndex = 0;
 let heroInterval;
+let slidesContainer = null;
 
-function setHeroImage(idx) {
+// Preload images to avoid flicker when switching large remote images
+function preloadHeroImages(urls, cb) {
+  let loaded = 0;
+  const imgs = [];
+  if (!urls || !urls.length) return cb && cb(imgs);
+  urls.forEach((u, i) => {
+    const img = new Image();
+    img.src = u;
+    img.onload = img.onerror = () => {
+      loaded++;
+      imgs[i] = img;
+      if (loaded === urls.length && typeof cb === 'function') cb(imgs);
+    };
+  });
+}
+
+function buildHeroSlides() {
   if (!heroSection) return;
-  heroSection.style.backgroundImage = `url('${heroImages[idx]}')`;
-  updateActiveIndicator(idx);
+  // remove existing slides if present
+  const existing = heroSection.querySelector('.hero-slides');
+  if (existing) existing.remove();
+
+  slidesContainer = document.createElement('div');
+  slidesContainer.className = 'hero-slides';
+
+  heroImages.forEach(src => {
+    const slide = document.createElement('div');
+    slide.className = 'hero-slide';
+    slide.style.backgroundImage = `url('${src}')`;
+    slidesContainer.appendChild(slide);
+  });
+
+  // Insert slides behind the overlay content so hero text stays visible
+  heroSection.insertBefore(slidesContainer, heroSection.firstChild);
+}
+
+function setHeroPosition(idx) {
+  if (!slidesContainer) return;
+  // clamp index
+  const count = heroImages.length;
+  heroIndex = ((idx % count) + count) % count;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    // If reduced motion requested, simply set background-image on heroSection as fallback
+    const src = heroImages[heroIndex];
+    if (heroSection) heroSection.style.backgroundImage = `url('${src}')`;
+  } else {
+    slidesContainer.style.transform = `translateX(${ -heroIndex * 100 }%)`;
+  }
+  updateActiveIndicator(heroIndex);
 }
 
 function showNextHeroImage() {
-  heroIndex = (heroIndex + 1) % heroImages.length;
-  setHeroImage(heroIndex);
+  setHeroPosition(heroIndex + 1);
 }
+
 function showPrevHeroImage() {
-  heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
-  setHeroImage(heroIndex);
+  setHeroPosition(heroIndex - 1);
 }
+
 function resetHeroInterval() {
   clearInterval(heroInterval);
-  heroInterval = setInterval(showNextHeroImage, 4000);
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) heroInterval = setInterval(showNextHeroImage, 4000);
 }
 
 function createHeroIndicators() {
@@ -1266,11 +1424,9 @@ function createHeroIndicators() {
     const btn = document.createElement('button');
     btn.className = 'hero-dot';
     btn.type = 'button';
-    btn.setAttribute('aria-label', `Slide ${i + 1}`);
-    btn.setAttribute('data-index', i);
-    btn.addEventListener('click', (e) => {
-      heroIndex = i;
-      setHeroImage(heroIndex);
+    btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    btn.addEventListener('click', () => {
+      setHeroPosition(i);
       resetHeroInterval();
     });
     container.appendChild(btn);
@@ -1281,31 +1437,86 @@ function createHeroIndicators() {
 function updateActiveIndicator(idx) {
   const container = document.getElementById(heroIndicatorsContainerId);
   if (!container) return;
-  Array.from(container.children).forEach((el, i) => {
-    const active = i === idx;
-    el.classList.toggle('active', active);
-    el.setAttribute('aria-current', active ? 'true' : 'false');
+  const dots = Array.from(container.children);
+  dots.forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+    d.setAttribute('aria-current', i === idx ? 'true' : 'false');
   });
 }
 
-// Initial setup
-createHeroIndicators();
-setHeroImage(heroIndex);
-heroInterval = setInterval(showNextHeroImage, 4000);
+// Arrow handlers (use optional chaining in case elements are missing)
+document.getElementById('hero-arrow-right')?.addEventListener('click', () => { showNextHeroImage(); resetHeroInterval(); });
+document.getElementById('hero-arrow-left')?.addEventListener('click', () => { showPrevHeroImage(); resetHeroInterval(); });
 
-// Initialize language on load from persisted selection or <html lang>
+// Pause autoplay while hovering/focusing the hero
+function attachHeroHoverPause(el) {
+  if (!el) return;
+  el.addEventListener('mouseenter', () => clearInterval(heroInterval));
+  el.addEventListener('focusin', () => clearInterval(heroInterval));
+  el.addEventListener('mouseleave', () => resetHeroInterval());
+  el.addEventListener('focusout', () => resetHeroInterval());
+}
+
+// Add touch / swipe support for mobile
+function attachSwipeSupport(el) {
+  if (!el || !slidesContainer) return;
+  let startX = 0;
+  let deltaX = 0;
+  let touching = false;
+
+  el.addEventListener('touchstart', (e) => {
+    clearInterval(heroInterval);
+    touching = true;
+    startX = e.touches[0].clientX;
+    deltaX = 0;
+  }, { passive: true });
+
+  el.addEventListener('touchmove', (e) => {
+    if (!touching) return;
+    deltaX = e.touches[0].clientX - startX;
+    // Move slides proportionally for direct feedback
+    const width = el.clientWidth || window.innerWidth;
+    const percent = deltaX / width * 100;
+    slidesContainer.style.transition = 'none';
+    slidesContainer.style.transform = `translateX(${ -heroIndex * 100 + percent }%)`;
+  }, { passive: true });
+
+  el.addEventListener('touchend', (e) => {
+    touching = false;
+    slidesContainer.style.transition = '';
+    const threshold = 40; // px
+    if (Math.abs(deltaX) > threshold) {
+      if (deltaX < 0) {
+        setHeroPosition(heroIndex + 1);
+      } else {
+        setHeroPosition(heroIndex - 1);
+      }
+    } else {
+      // snap back
+      setHeroPosition(heroIndex);
+    }
+    resetHeroInterval();
+  });
+}
+
+// Initialize the hero: preload images, build slides, indicators and start autoplay
 document.addEventListener('DOMContentLoaded', () => {
-  initTranslations();
-});
+  // initialize translations too (existing call elsewhere may already do this)
+  try { initTranslations(); } catch (e) { /* ignore */ }
 
-// Arrow button events
-document.getElementById('hero-arrow-left').addEventListener('click', () => {
-  showPrevHeroImage();
-  resetHeroInterval();
-});
-document.getElementById('hero-arrow-right').addEventListener('click', () => {
-  showNextHeroImage();
-  resetHeroInterval();
+  if (!heroSection || !heroImages || !heroImages.length) return;
+  preloadHeroImages(heroImages, () => {
+    buildHeroSlides();
+    createHeroIndicators();
+    setHeroPosition(0);
+    attachHeroHoverPause(heroSection);
+    attachSwipeSupport(heroSection);
+    // ensure transitionend keeps index in sync if animations finish
+    slidesContainer.addEventListener('transitionend', () => {
+      updateActiveIndicator(heroIndex);
+    });
+    resetHeroInterval();
+  });
 });
 
 // Back to Top Button Functionality
@@ -1385,34 +1596,57 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     const items = menuItems[patientType] || menuItems.patient;
-    
-    // Update dropdown menu
+
+    // Update dropdown menu (compact)
     if (lookingForMenu) {
       lookingForMenu.innerHTML = items.map(item => 
         `<li><a class="dropdown-item" href="#" data-value="${item.value}">
           <i class="${item.icon} me-2"></i>${item.text}
         </a></li>`
       ).join('');
-      
+
       // Update button text to first option
-      if (lookingForBtn) {
+      if (lookingForBtn && items[0]) {
         lookingForBtn.innerHTML = `<i class="${items[0].icon} me-2"></i>${items[0].text}`;
         lookingForBtn.setAttribute('data-value', items[0].value);
       }
-      
+
       // Add click handlers to new menu items
       lookingForMenu.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', function(e) {
           e.preventDefault();
           const value = this.getAttribute('data-value');
           const text = this.textContent.trim();
-          const icon = this.querySelector('i').className;
-          
-          lookingForBtn.innerHTML = `<i class="${icon} me-2"></i>${text}`;
-          lookingForBtn.setAttribute('data-value', value);
+          const icon = this.querySelector('i') ? this.querySelector('i').className : '';
+
+          if (lookingForBtn) {
+            lookingForBtn.innerHTML = `<i class="${icon} me-2"></i>${text}`;
+            lookingForBtn.setAttribute('data-value', value);
+          }
         });
       });
     }
+
+    // helpOptionsGrid was removed from the DOM per user request; dynamic rendering skipped.
+  }
+
+  // Use event delegation on the patient-type group so it works across language switches
+  const patientTypeGroup = document.querySelector('.patient-type-group');
+  if (patientTypeGroup) {
+    patientTypeGroup.addEventListener('click', function(e) {
+      const label = e.target.closest && e.target.closest('.patient-type-btn');
+      if (!label) return;
+      // Find the associated input (by for attribute)
+      const forAttr = label.getAttribute('for');
+      if (forAttr) {
+        const input = document.getElementById(forAttr);
+        if (input) {
+          input.checked = true;
+          // Update the options grid for the selected patient type
+          try { updateLookingForOptions(forAttr); } catch (err) { /* ignore */ }
+        }
+      }
+    });
   }
   
   // Help submit button functionality

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .help-hero { padding: 3rem 1rem; background: linear-gradient(135deg, rgba(226,77,106,0.08), rgba(0,123,255,0.04)); }
+    .help-card { background: #fff; padding: 1.6rem; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .help-list { margin-top: 1rem; }
+    .help-list li { margin-bottom: 0.75rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container d-flex align-items-center">
+      <a href="style.html" class="navbar-brand d-flex align-items-center text-dark">
+        <img src="logo-navbar.png" class="navbar-logo me-3" alt="logo">
+        <div class="brand-text">
+          <div class="brand-primary">المؤسسة الاستشفائية المتخصصة للأم والطفل</div>
+          <div class="brand-secondary">مركز الرعاية المتقدمة</div>
+        </div>
+      </a>
+    </div>
+  </nav>
+
+    <main class="container page-help">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Professional healthcare services</h1>
+          <p class="hero-lead">Clear, fast, and reliable information to help you find care, book appointments, and get urgent support.</p>
+        </div>
+      </section>
+
+      <section class="lead-panel">
+        <h2 class="section-title">What you'll find on this page</h2>
+        <ul class="lead-list">
+          <li>Concise service overview and practical next steps.</li>
+          <li>Clear contact points and opening hours.</li>
+          <li>Easy links for booking or finding a department.</li>
+        </ul>
+      </section>
+
+      <section class="page-body grid">
+        <article class="content-card">
+          <h3 class="card-title">About this service</h3>
+          <p class="muted">This page provides up-to-date information and clear next steps. If you need immediate help, call the emergency number listed in the header.</p>
+        </article>
+
+        <aside class="sidebar-card">
+          <h4>Quick actions</h4>
+          <ul class="action-list">
+            <li><a href="find-doctor.html">Find a Doctor</a></li>
+            <li><a href="book-appointment.html">Book an Appointment</a></li>
+            <li><a href="services.html">Services & Departments</a></li>
+            <li><a href="contact.html">Contact & Directions</a></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="cta-panel">
+        <h3>Need hands-on help?</h3>
+        <p>Call our main line or use the online booking to reserve a slot. We aim to respond within one business day.</p>
+        <p><a class="btn btn-primary" href="book-appointment.html">Book an appointment</a> <a class="btn btn-outline" href="contact.html">Contact us</a></p>
+      </section>
+    </main>
+
+  <footer class="footer py-4 mt-5 text-white text-center">
+    <div class="container">&copy; 2025 المؤسسة الاستشفائية المتخصصة للأم والطفل</div>
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> مركز الرعاية — All rights reserved.</p>
+        <p><a href="style.html">Back to home</a></p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+  </footer>
+</body>
+</html>

@@ -8,32 +8,194 @@ body {
 }
 
 /* Dark Mode Styles */
+/* Dark Mode: true black */
 body.dark-mode {
-  background: #1a1a1a;
-  color: #fff;
+  background: #000 !important;
+  color: #e6e6e6 !important;
 }
 
-body.dark-mode .navbar {
-  background: #333;
-}
-
-body.dark-mode .main-header {
-  background: #2a2a2a;
-  color: #fff;
+body.dark-mode .navbar,
+body.dark-mode .main-header,
+body.dark-mode .sub-menu,
+body.dark-mode .footer,
+body.dark-mode .modal-content {
+  background: #000 !important;
+  color: #e6e6e6 !important;
 }
 
 body.dark-mode .main-header-title {
-  color: #ff6b8b;
+  color: #ff9fb3; /* soft pink accent on black */
 }
 
 body.dark-mode .main-header-desc {
+  color: #e6e6e6;
+}
+
+/* Force white/light components to true black in dark mode */
+body.dark-mode .bg-white,
+body.dark-mode .bg-light,
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .dropdown-menu,
+body.dark-mode .alert,
+body.dark-mode .progress,
+body.dark-mode .sub-menu,
+body.dark-mode .footer,
+body.dark-mode .cus_footer,
+body.dark-mode .cus-sub_footer_links,
+body.dark-mode .cus-footer_menu {
+  background: #000 !important;
+  color: #e6e6e6 !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Make sure elements that use .bg-white with opacity are dark as well */
+body.dark-mode [class*="bg-white"] {
+  background: #000 !important;
+}
+
+/* Buttons and badges need adjusted contrast in dark mode */
+body.dark-mode .btn,
+body.dark-mode .badge,
+body.dark-mode .btn-outline-light {
+  color: #e6e6e6 !important;
+}
+
+/* Logo and brand: enlarge and emphasize */
+.navbar-logo {
+  height: 80px;
+  width: auto;
+  max-width: 80px;
+  padding: 6px;
+  transition: all 0.25s ease;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  margin-left: 0.75rem;
+}
+
+.brand-primary {
+  font-size: 1.6rem;
+  font-weight: 800;
   color: #fff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.brand-secondary {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  margin-top: -2px;
+}
+
+/* Responsive reductions for logo/brand */
+@media (max-width: 992px) {
+  .navbar-logo { height: 64px; max-width: 64px; }
+  .brand-primary { font-size: 1.35rem; }
+}
+
+@media (max-width: 576px) {
+  .navbar-logo { height: 52px; max-width: 52px; }
+  .brand-primary { font-size: 1.1rem; }
+  .brand-secondary { display: none; }
+}
+
+/* Final overrides to ensure logo & brand display as requested */
+.navbar-brand .navbar-logo {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  height: 58px !important; /* increased slightly */
+  max-width: 120px !important;
+  background: transparent !important;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12)) saturate(1.02) contrast(1.02) !important;
+  box-shadow: none !important; /* remove any visible box or inset */
+}
+
+.dark-mode .navbar-brand .navbar-logo {
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)) saturate(1.02) contrast(1.03) !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.navbar-brand .brand-primary {
+  font-size: 1.15rem !important; /* slightly larger and bolder */
+  font-weight: 900 !important;
+  color: #fff !important;
+  white-space: nowrap !important; /* keep full name on one line */
+}
+
+.navbar-brand .brand-secondary {
+  font-size: 0.95rem !important;
+  color: rgba(255,255,255,0.9) !important;
+}
+
+/* Make the brand container a no-wrap flex row so logo and name stay inline */
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Allow brand to take more horizontal space if needed */
+.navbar-brand { min-width: 260px !important; }
+
+/* Make brand text adapt: don't wrap, but show ellipsis if it overflows */
+.brand-text { min-width: 0; }
+.brand-primary {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Responsive tweaks: smaller on narrow screens */
+@media (max-width: 768px) {
+  .navbar-brand .navbar-logo { height: 40px !important; max-width: 82px !important; }
+  .navbar-brand .brand-primary { font-size: 1rem !important; }
+  .navbar-brand { min-width: 180px !important; }
+}
+
+.brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+  white-space: nowrap !important;
 }
 
 /* Footer Styles */
 .footer {
   background: #e24d6a;
   position: relative;
+}
+
+/* Help options grid (professional cards) */
+.help-options-grid {
+  margin-top: 0.5rem;
+}
+.help-option-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  color: #222;
+}
+.help-option-card .option-icon { color: #e24d6a; }
+.help-option-card .option-title { color: #222; }
+.help-option-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  text-decoration: none;
+}
+.help-option-card .option-desc { opacity: 0.9; }
+
+@media (prefers-reduced-motion: reduce) {
+  .help-option-card { transition: none; transform: none; }
 }
 
 .footer::before {
@@ -169,6 +331,48 @@ body.dark-mode .footer::before {
 .navbar .nav-link:hover::after {
   width: 80%;
 }
+
+/* Active state for top navigation and submenu links */
+.navbar .nav-link.active,
+.navbar .dropdown-item.active,
+.sub-menu .sub-link.active {
+  background: transparent;
+  color: #ff5a87 !important; /* pink accent that matches navbar */
+  transform: translateY(-1px);
+  font-weight: 700;
+}
+
+.navbar .nav-link.active::after,
+.navbar .dropdown-item.active::after {
+  width: 40%;
+  background: linear-gradient(90deg, #ffd1dc, #ff5a87);
+}
+
+/* Highlight for more prominent active item (like appointment) */
+.navbar .nav-link.btn.active,
+.navbar .nav-link.btn.active i {
+  filter: brightness(1.05) saturate(1.1);
+}
+
+/* Ensure navbar search is inline and visible (we keep it on the same line as actions) */
+.navbar .search-container { display: flex !important; align-items: center; }
+.navbar .search-container .search-input {
+  position: relative; /* inline */
+  right: auto;
+  top: auto;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 20px;
+  opacity: 1;
+  width: 180px;
+  pointer-events: auto;
+  transition: width 0.35s ease, box-shadow 0.25s;
+  background: rgba(255,255,255,0.95);
+  color: #222;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.navbar .search-container .search-icon { color: #fff; margin-left: 8px; }
+.navbar .search-container:focus-within { box-shadow: 0 6px 18px rgba(255,90,135,0.12); }
 .navbar-brand {
   font-weight: 600;
   color: #fff;
@@ -239,32 +443,31 @@ body.dark-mode .footer::before {
 
 /* Navbar Logo Styling */
 .navbar-logo {
-  height: 65px;
+  height: 88px; /* larger logo */
   width: auto;
-  max-width: 65px;
+  max-width: 140px;
   object-fit: contain;
-  transition: all 0.3s ease;
-  /* Professional medical logo styling */
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
-  border-radius: 50%;
-  padding: 3px;
+  transition: all 0.2s ease;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
+  border-radius: 0; /* remove circular border */
+  padding: 0; /* remove inner padding */
 }
 
 .navbar-logo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0 5px 12px rgba(0,0,0,0.25));
-  background: rgba(255,255,255,0.2);
+  transform: scale(1.03);
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.18));
+  background: transparent; /* no circle */
 }
 
-/* Dark mode logo adjustments */
+/* Dark mode logo adjustments: keep it clean on black */
 .dark-mode .navbar-logo {
-  filter: drop-shadow(0 3px 6px rgba(255,255,255,0.15));
-  background: rgba(255,255,255,0.05);
+  filter: drop-shadow(0 3px 6px rgba(255,255,255,0.06));
+  background: transparent;
 }
 
 .dark-mode .navbar-logo:hover {
-  filter: drop-shadow(0 5px 12px rgba(255,255,255,0.25));
-  background: rgba(255,255,255,0.1);
+  filter: drop-shadow(0 5px 12px rgba(255,255,255,0.08));
+  background: transparent;
 }
 
 /* Buttons */
@@ -670,6 +873,75 @@ body.dark-mode #theme-toggle:hover {
 .hero-bg-maisons {
   background-image: url('https://cliniquemaisonslaffitte.vivalto-sante.com/wp-content/uploads/2022/07/facade-exterieure-entree-urgences-clinique-de-maisons-laffitte.jpg');
 }
+/* Enhanced hero slides: transform-based RTL sliding for smooth animation */
+.hero-section {
+  overflow: hidden; /* contain slides */
+}
+
+.hero-slides {
+  position: absolute;
+  inset: 0 0 0 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transform: translateX(0);
+  transition: transform 0.9s cubic-bezier(.22,.9,.27,1);
+  will-change: transform;
+}
+
+.hero-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  /* subtle zoom on the active slide via a transform on the inner bg if desired */
+}
+
+/* overlay to improve text contrast on any image */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Indicators (dots) */
+.hero-indicators {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  gap: 8px;
+}
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.hero-dot.active {
+  background: #ff5a87;
+  transform: scale(1.25);
+}
+
+/* Position hero controls above slides */
+.hero-arrow { z-index: 40; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slides { transition: none !important; }
+  .hero-dot { transition: none !important; }
+}
 .hero-content {
   position: relative;
   top: 55%; /* moved down from 50% */
@@ -762,7 +1034,7 @@ body:not(.dark-mode) #hero-desc {
   color: #e24d6a;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  font-size: 2.2rem; /* Slightly smaller for better proportion */
+  font-size: 2.6rem; /* increased heading size */
   line-height: 1.2;
 }
 .main-header-desc {
@@ -985,25 +1257,25 @@ footer .social-icons a:hover {
 
 /* Dark mode */
 .dark-mode {
-  background: #121212;
-  color: #f0f0f0;
+  background: #000 !important;
+  color: #e6e6e6 !important;
 }
 .dark-mode .navbar {
-  background: #333;
+  background: #000 !important;
 }
 .dark-mode .nav-link:hover {
-  background: #555;
+  background: rgba(255,90,135,0.06);
 }
 .dark-mode footer {
-  background: #111;
+  background: #000 !important;
 }
 .dark-mode .btn-outline-light {
   color: #fff !important;
   border-color: #fff !important;
 }
 .dark-mode .btn-light {
-  background: #eee !important;
-  color: #000 !important;
+  background: #111 !important;
+  color: #e6e6e6 !important;
 }
 
 /* Dark mode appointment button */
@@ -1122,25 +1394,25 @@ body.rtl .search-input {
 }
 
 /* Ensure dropdowns and cards are readable in dark mode */
-.bg-white {
-  background: #fff !important;
-  color: #222 !important;
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.02;
+  margin-left: 0.8rem;
 }
-.dark-mode .bg-white {
-  background: #222 !important;
-  color: #f0f0f0 !important;
+
+.brand-primary {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
-.dark-mode .navbar,
-.dark-mode .dropdown-menu {
-  background: #333 !important;
-  color: #f0f0f0 !important;
-}
-.dark-mode .dropdown-item {
-  color: #f0f0f0 !important;
-}
-.dark-mode .dropdown-item:hover {
-  background: #444 !important;
-  color: #f8d7da !important;
+
+.brand-secondary {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-top: -4px;
 }
 .dark-mode .dropdown-item:hover::after {
   background: linear-gradient(90deg, #f8d7da, #e24d6a);
@@ -2820,8 +3092,10 @@ body.rtl .search-input {
 
 /* Let Us Help Section Styles */
 .let-us-help-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #fcfcfd 0%, #d8dcdf 100% );
 }
+
+
 
 .section-title {
   font-size: 2.5rem;
@@ -2857,22 +3131,26 @@ body.rtl .search-input {
 }
 
 .patient-type-btn {
-  border-radius: 25px;
-  padding: 0.8rem 1.5rem;
-  font-weight: 500;
-  border: 2px solid #e24d6a;
-  color: #e24d6a;
-  transition: all 0.3s ease;
-  margin: 0 0.5rem;
+  /* Full capsule / pill shape (اسطوانة) */
+  border-radius: 9999px !important;
+  padding: 0.7rem 1.6rem !important;
+  font-weight: 600;
+  border: 2px solid #e24d6a !important;
+  color: #e24d6a !important;
+  transition: all 0.25s ease;
+  margin: 0 0.4rem !important;
 }
 
 .patient-type-btn:hover,
 .patient-type-btn.active {
-  background: #e24d6a;
-  color: #fff;
+  background: #e24d6a !important;
+  color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(226,77,106,0.3);
+  box-shadow: 0 6px 20px rgba(226,77,106,0.28) !important;
 }
+
+/* Adjust spacing for RTL contexts so pills sit nicely */
+[dir="rtl"] .patient-type-btn { margin: 0 0.25rem; }
 
 .looking-for-btn {
   border-radius: 25px;
@@ -2984,7 +3262,8 @@ body.rtl .search-input {
 
 /* Recently Searched Conditions Styles */
 .searched-conditions-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #e6e8eb 0%, #d4dce4 100%);
+  padding: 4rem 0;
 }
 
 .conditions-grid {
@@ -3387,27 +3666,26 @@ body.rtl .search-input {
   font-size: 1.125rem !important;
 }
 
-/* High Contrast Mode */
+/* High Contrast Mode - Fixed */
 .high-contrast {
-  filter: contrast(120%) brightness(110%) !important;
+  background-color: #fff !important;
+  color: #000 !important;
 }
 
-.high-contrast .text-muted {
-  color: #495057 !important;
+.high-contrast .text-dark {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast .text-light,
+.high-contrast .text-white {
+  color: #fff !important;
+  font-weight: 600 !important;
 }
 
 .high-contrast .btn {
   border-width: 2px !important;
-}
-
-.high-contrast a {
-  text-decoration: underline !important;
-}
-
-.high-contrast .card,
-.high-contrast .modal-content {
-  border-width: 2px !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  font-weight: 600 !important;
 }
 
 /* Reduced Motion */
@@ -3435,4 +3713,1466 @@ body.rtl .search-input {
 
 .dark-mode .text-muted {
   color: #adb5bd !important;
+}
+
+/* Modal Fix - Ensure modals always display properly */
+.modal {
+  display: none !important;
+}
+
+.modal.show {
+  display: block !important;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure modals work in all modes */
+.high-contrast .modal-content,
+.reduce-motion .modal-content {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+.dark-mode .modal-content {
+  background-color: #343a40 !important;
+  color: #fff !important;
+}
+
+/* Theme Selection Grid */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.theme-option {
+  position: relative;
+}
+
+.theme-option input[type="radio"] {
+  display: none;
+}
+
+.theme-card {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.theme-card:hover {
+  border-color: #0d6efd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-option input[type="radio"]:checked + .theme-card {
+  border-color: #0d6efd;
+  background-color: #f8f9ff;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+.theme-preview {
+  width: 80px;
+  height: 50px;
+  border-radius: 4px;
+  margin: 0 auto 8px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.theme-header {
+  height: 12px;
+  width: 100%;
+}
+
+.theme-content {
+  padding: 4px;
+  height: calc(100% - 12px);
+}
+
+.theme-text-line {
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
+.theme-text-line.short {
+  width: 60%;
+}
+
+.theme-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Light Theme Preview */
+.light-theme {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border: 2px solid #dee2e6;
+}
+
+.light-theme .theme-header {
+  background: linear-gradient(90deg, #e24d6a, #ff6b8b);
+  height: 8px;
+}
+
+.light-theme .theme-text-line {
+  background: #6c757d;
+  border-radius: 2px;
+}
+
+/* Dark Theme Preview */
+.dark-theme {
+  background: linear-gradient(135deg, #212529, #343a40);
+  border: 2px solid #495057;
+}
+
+.dark-theme .theme-header {
+  background: linear-gradient(90deg, #66b3ff, #4dabf7);
+  height: 8px;
+}
+
+.dark-theme .theme-text-line {
+  background: #f8f9fa;
+  border-radius: 2px;
+}
+
+/* AMOLED Theme Preview */
+.amoled-theme {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  border: 2px solid #333333;
+}
+
+.amoled-theme .theme-header {
+  background: linear-gradient(90deg, #80d4ff, #60a5fa);
+  height: 8px;
+}
+
+.amoled-theme .theme-text-line {
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+/* Blue Dark Theme Preview */
+.blue-dark-theme {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 2px solid #475569;
+}
+
+.blue-dark-theme .theme-header {
+  background: linear-gradient(90deg, #93c5fd, #60a5fa);
+  height: 8px;
+}
+
+.blue-dark-theme .theme-text-line {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+/* Medical Blue Theme Preview */
+.medical-theme {
+  background: linear-gradient(135deg, #f8f9ff, #e7f3ff);
+  border: 2px solid #b6d7ff;
+}
+
+.medical-theme .theme-header {
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  height: 8px;
+}
+
+.medical-theme .theme-text-line {
+  background: #495057;
+  border-radius: 2px;
+}
+
+.warm-theme {
+  background: linear-gradient(135deg, #fff8f0, #ffeaa7);
+  border: 2px solid #fdcb6e;
+}
+
+.warm-theme .theme-header {
+  background: linear-gradient(90deg, #fd7e14, #e17055);
+  height: 8px;
+}
+
+.warm-theme .theme-text-line {
+  background: #6c757d;
+  border-radius: 2px;
+}
+
+.nature-theme {
+  background: linear-gradient(135deg, #f0fff4, #d4edda);
+  border: 2px solid #a3d977;
+}
+
+.nature-theme .theme-header {
+  background: linear-gradient(90deg, #198754, #20c997);
+  height: 8px;
+}
+
+.nature-theme .theme-text-line {
+  background: #495057;
+  border-radius: 2px;
+}
+
+.elegant-theme {
+  background: linear-gradient(135deg, #faf8ff, #f3e5f5);
+  border: 2px solid #ce93d8;
+}
+
+.elegant-theme .theme-header {
+  background: linear-gradient(90deg, #6f42c1, #d63384);
+  height: 8px;
+}
+
+.elegant-theme .theme-text-line {
+  background: #495057;
+  border-radius: 2px;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - VISUALLY CLEAR
+   ======================================== */
+
+/* Dark Theme - Clean and Readable */
+body.theme-dark {
+  --primary-color: #4dabf7;
+  --secondary-color: #6c757d;
+  --accent-color: #20c997;
+  --bg-color: #1a1a1a;
+  --text-color: #f8f9fa;
+  --navbar-bg: linear-gradient(135deg, #212529, #343a40);
+  --card-bg: #2d3748;
+  --border-color: #495057;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-dark .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-dark .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-dark .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-dark .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-dark .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* AMOLED Theme - High Contrast Pure Black */
+body.theme-amoled {
+  --primary-color: #80d4ff;
+  --secondary-color: #9ca3af;
+  --accent-color: #10b981;
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --navbar-bg: linear-gradient(135deg, #000000, #1f1f1f);
+  --card-bg: #1a1a1a;
+  --border-color: #404040;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-amoled .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-amoled .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-amoled .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-amoled .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-amoled .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #000 !important;
+}
+
+/* Blue Dark Theme - High Visibility Blue Dark Mode */
+body.theme-blue-dark {
+  --primary-color: #93c5fd;
+  --secondary-color: #a5b4fc;
+  --accent-color: #60a5fa;
+  --bg-color: #1e293b;
+  --text-color: #f1f5f9;
+  --navbar-bg: linear-gradient(135deg, #334155, #475569);
+  --card-bg: #334155;
+  --border-color: #64748b;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-blue-dark .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-blue-dark .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-blue-dark .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-blue-dark .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-blue-dark .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #000 !important;
+}
+
+/* Medical Blue Theme - Professional and Clean */
+body.theme-medical {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --accent-color: #1d4ed8;
+  --bg-color: #f8faff;
+  --text-color: #1e293b;
+  --navbar-bg: linear-gradient(135deg, #2563eb, #3b82f6);
+  --card-bg: #ffffff;
+  --border-color: #bfdbfe;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-medical .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-medical .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1) !important;
+}
+
+body.theme-medical .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-medical .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-medical .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* Warm Theme - Cozy and Inviting */
+body.theme-warm {
+  --primary-color: #ff6b35;
+  --secondary-color: #f4a261;
+  --accent-color: #e76f51;
+  --bg-color: #fefcf3;
+  --text-color: #2a1810;
+  --navbar-bg: linear-gradient(135deg, #ff6b35, #f4a261);
+  --card-bg: #fff8f0;
+  --border-color: #e9c46a;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-warm .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-warm .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(255, 107, 53, 0.1) !important;
+}
+
+body.theme-warm .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-warm .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-warm .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* ========================================
+   UNIVERSAL THEME FIXES - NO CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.3s ease !important;
+}
+
+body.theme-dark .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - REMOVED ALL CONFLICTS
+   ======================================== */
+
+/* Dark Theme - Clean and Readable */
+body.theme-dark {
+  --primary-color: #4dabf7;
+  --secondary-color: #6c757d;
+  --accent-color: #20c997;
+  --bg-color: #1a1a1a;
+  --text-color: #f8f9fa;
+  --navbar-bg: linear-gradient(135deg, #212529, #343a40);
+  --card-bg: #2d3748;
+  --border-color: #495057;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-dark .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-dark .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-dark .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-dark .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-dark .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* AMOLED Theme - High Contrast Pure Black */
+body.theme-amoled {
+  --primary-color: #80d4ff;
+  --secondary-color: #9ca3af;
+  --accent-color: #10b981;
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --navbar-bg: linear-gradient(135deg, #000000, #1f1f1f);
+  --card-bg: #1a1a1a;
+  --border-color: #404040;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-amoled .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-amoled .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-amoled .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-amoled .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-amoled .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #000 !important;
+}
+
+/* Blue Dark Theme - High Visibility Blue Dark Mode */
+body.theme-blue-dark {
+  --primary-color: #93c5fd;
+  --secondary-color: #a5b4fc;
+  --accent-color: #60a5fa;
+  --bg-color: #1e293b;
+  --text-color: #f1f5f9;
+  --navbar-bg: linear-gradient(135deg, #334155, #475569);
+  --card-bg: #334155;
+  --border-color: #64748b;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-blue-dark .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-blue-dark .card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.theme-blue-dark .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-blue-dark .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+body.theme-blue-dark .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #000 !important;
+}
+
+/* Medical Blue Theme - Professional and Clean */
+body.theme-medical {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --accent-color: #1d4ed8;
+  --bg-color: #f8faff;
+  --text-color: #1e293b;
+  --navbar-bg: linear-gradient(135deg, #2563eb, #3b82f6);
+  --card-bg: #ffffff;
+  --border-color: #bfdbfe;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-medical .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-medical .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1) !important;
+}
+
+body.theme-medical .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-medical .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-medical .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* Warm Theme - Cozy and Inviting */
+body.theme-warm {
+  --primary-color: #ff6b35;
+  --secondary-color: #f4a261;
+  --accent-color: #e76f51;
+  --bg-color: #fefcf3;
+  --text-color: #2a1810;
+  --navbar-bg: linear-gradient(135deg, #ff6b35, #f4a261);
+  --card-bg: #fff8f0;
+  --border-color: #e9c46a;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-warm .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-warm .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(255, 107, 53, 0.1) !important;
+}
+
+body.theme-warm .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-warm .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-warm .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* Nature Theme - Fresh and Natural */
+body.theme-nature {
+  --primary-color: #2d6a4f;
+  --secondary-color: #40916c;
+  --accent-color: #52b788;
+  --bg-color: #f7fff7;
+  --text-color: #1b4332;
+  --navbar-bg: linear-gradient(135deg, #2d6a4f, #40916c);
+  --card-bg: #f0fff4;
+  --border-color: #74c69d;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-nature .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-nature .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(45, 106, 79, 0.1) !important;
+}
+
+body.theme-nature .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-nature .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-nature .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* Elegant Theme - Sophisticated and Refined */
+body.theme-elegant {
+  --primary-color: #8b5cf6;
+  --secondary-color: #a855f7;
+  --accent-color: #c084fc;
+  --bg-color: #fdfcff;
+  --text-color: #374151;
+  --navbar-bg: linear-gradient(135deg, #8b5cf6, #a855f7);
+  --card-bg: #f9f7ff;
+  --border-color: #d8b4fe;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.theme-elegant .navbar {
+  background: var(--navbar-bg) !important;
+}
+
+body.theme-elegant .card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 6px rgba(139, 92, 246, 0.1) !important;
+}
+
+body.theme-elegant .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-elegant .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body.theme-elegant .btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* ========================================
+   UNIVERSAL THEME FIXES - NO CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.3s ease !important;
+}
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.3s ease !important;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.3s ease !important;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   CLEAN THEME SYSTEM - NO MORE CONFLICTS
+   ======================================== */
+
+/* Ensure proper contrast for all themes */
+.theme-dark .text-muted,
+.theme-amoled .text-muted,
+.theme-blue-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-amoled h1, .theme-amoled h2, .theme-amoled h3, .theme-amoled h4, .theme-amoled h5, .theme-amoled h6,
+.theme-blue-dark h1, .theme-blue-dark h2, .theme-blue-dark h3, .theme-blue-dark h4, .theme-blue-dark h5, .theme-blue-dark h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix section backgrounds */
+.theme-dark .searched-conditions-section,
+.theme-dark .let-us-help-section,
+.theme-dark .featured-specialties-section,
+.theme-amoled .searched-conditions-section,
+.theme-amoled .let-us-help-section,
+.theme-amoled .featured-specialties-section,
+.theme-blue-dark .searched-conditions-section,
+.theme-blue-dark .let-us-help-section,
+.theme-blue-dark .featured-specialties-section {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix Bootstrap utilities */
+.theme-dark .bg-light,
+.theme-amoled .bg-light,
+.theme-blue-dark .bg-light {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.theme-dark .bg-white,
+.theme-amoled .bg-white,
+.theme-blue-dark .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Form elements */
+.theme-dark .form-control,
+.theme-amoled .form-control,
+.theme-blue-dark .form-control {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Links */
+.theme-dark a,
+.theme-amoled a,
+.theme-blue-dark a {
+  color: var(--primary-color) !important;
+}
+
+.theme-dark a:hover,
+.theme-amoled a:hover,
+.theme-blue-dark a:hover {
+  color: var(--text-color) !important;
+}
+
+/* Theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.3s ease !important;
 }
